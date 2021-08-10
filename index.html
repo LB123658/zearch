@@ -37,6 +37,7 @@ height: 80px;
 cursor: default;
 user-select: none;
 -webkit-user-select: none;
+background: #181818;
 }
 .control {
 height: 40px;
@@ -44,6 +45,7 @@ width: 40px;
 background: transparent;
 border: none;
 margin-top: 40px;
+margin-left: 2px;
 border-radius: 8px;
 transition: background 0.5s;
 }
@@ -51,31 +53,62 @@ transition: background 0.5s;
 background: #3b4351;
 color: #5765f2;
 }
+#input {
+position: fixed;
+top: 40px;
+left: 137px;
+height: 38px;
+background: #282828;
+border: none;
+border-radius: 8px;
+font-size: 17px;
+width: 300px;
+}
+.right {
+float: right;
+}
 </style>
 </head>
-<body onload="changeLinks()">
+<body onload="changeLinks();setsizeLoad()" onresize="setsizeResize()">
 <div id="top">
 <button class="control" title="Go back"><span class="material-icons">arrow_back_ios</span></button>
-<button class="control" title="Go foreward"><span class="material-icons">arrow_forward_ios</span></button>
+<button class="control" title="Go forward"><span class="material-icons">arrow_forward_ios</span></button>
 <button class="control" title="Reload page" onclick="refresh()"><span class="material-icons">refresh</span></button>
+
+<input type="text" id="input" placeholder="Enter a URL" autocomplete="off">
+
+<button class="control right" title="Download page"><span class="material-icons">save_alt</span></button>
+<button class="control right" title="Inspect"><span class="material-icons">code</span></button>
+<button class="control right" title="Go to website"><span class="material-icons">east</span></button>
+
 </div>
 
 <iframe id="frame" src="https://wikimediafoundation.org/wikipedia20/"></iframe>
 
 <script>
 var iframe = document.getElementById("frame");
-var frameHeight = window.innerHeight - 80;
+var input = document.getElementById("input");
 
-// set iframe to the right height
-document.body.onload = function() {iframe.style.height = frameHeight + "px";};
-document.body.onresize = function() {iframe.style.height = frameHeight + "px";};
+
+// set iframe and input to the right size
+function setsizeLoad() {
+var frameHeight = window.innerHeight - 80;
+var inputWidth = window.innerWidth - 270;
+iframe.style.height = frameHeight + "px"; input.style.width = inputWidth + "px";
+}
+function setsizeResize() {
+var frameHeight = window.innerHeight - 80;
+var inputWidth = window.innerWidth - 270;
+iframe.style.height = frameHeight + "px"; 
+input.style.width = inputWidth + "px";
+}
 
 
 function changeLinks() {
 var link = document.getElementById("frame").contentWindow.document.getElementsByTagName("A");
 var i;
 for (i = 0; i < link.length; i++) {
-  x[i].target = "_self";
+  link[i].target = "_self";
 }
 }
 
