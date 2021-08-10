@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <link rel='icon' href='https://lb123658.github.io/galaxy/favicon.png' type='image/png'/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">
 <style>
 body {
 background: #2F3137;
@@ -67,6 +68,23 @@ width: 300px;
 .right {
 float: right;
 }
+#textarea {
+position: absolute;
+top: 80px;
+left: 0px;
+width: 100%;
+height: 300px;
+border: none;
+font-family: 'Fira Code', monospace;
+color: #5765f2;
+z-index: 1;
+background: #181818;
+visibility: hidden;
+}
+#textarea::selection {
+background: grey;
+color: #181818;
+}
 </style>
 </head>
 <body onload="changeLinks();setsizeLoad()" onresize="setsizeResize()">
@@ -78,31 +96,46 @@ float: right;
 <input type="text" id="input" placeholder="Enter a URL" autocomplete="off">
 
 <button class="control right" title="Download page"><span class="material-icons">save_alt</span></button>
-<button class="control right" title="Inspect"><span class="material-icons">code</span></button>
-<button class="control right" title="Go to website"><span class="material-icons">east</span></button>
+<button class="control right" title="Inspect" onclick="loadXMLDoc()"><span class="material-icons">code</span></button>
+<button class="control right" title="Go to website" onclick="go()"><span class="material-icons">east</span></button>
 
 </div>
 
-<iframe id="frame" src="https://wikimediafoundation.org/wikipedia20/"></iframe>
-
+<iframe id="frame" src=""></iframe>
+<textarea id="textarea"></textarea>
 <script>
 var iframe = document.getElementById("frame");
 var input = document.getElementById("input");
+var textarea = document.getElementById("textarea");
 
 
 // set iframe and input to the right size
 function setsizeLoad() {
 var frameHeight = window.innerHeight - 80;
 var inputWidth = window.innerWidth - 270;
-iframe.style.height = frameHeight + "px"; input.style.width = inputWidth + "px";
+iframe.style.height = frameHeight + "px"; 
+input.style.width = inputWidth + "px";
+textarea.style.height = frameheight + "px";
 }
 function setsizeResize() {
 var frameHeight = window.innerHeight - 80;
 var inputWidth = window.innerWidth - 270;
 iframe.style.height = frameHeight + "px"; 
 input.style.width = inputWidth + "px";
+textarea.style.height = frameheight + "px";
 }
 
+function loadXMLDoc() {
+textarea.style.visibility = "visible";
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("textarea").value =  this.responseText;
+    }
+  };
+  xhttp.open("GET", document.getElementById("input").value, true);
+  xhttp.send();
+}
 
 function changeLinks() {
 var link = document.getElementById("frame").contentWindow.document.getElementsByTagName("A");
@@ -114,6 +147,9 @@ for (i = 0; i < link.length; i++) {
 
 function refresh() {
 iframe.src = iframe.src;
+}
+function go() {
+iframe.src = input.value;
 }
 </script>
 </body>
