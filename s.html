@@ -104,28 +104,37 @@ text-decoration: underline;
 </form>
 </div>
 
-<div id="results">
-  <div>
-  <p>Zearch is currently being updated.</p>
-  <a href="#">Learn more</a>
-  </div>
-</div>
+<div id="results"></div>
 
 <script>
 var query = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
+var q = query.toLowerCase();
+
 
 var input = document.getElementById("input");
 var results = document.getElementById("results");
 
 input.value = query;
 
-function re(title,link,domain) {
+function r(title,link,domain) {
 var x = document.createElement("DIV");
 x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a>";
 results.appendChild(x);
 }
 
-re("Google Search","https://google.com","www.google.com");
+if (q.indexOf(" ") < 0 && q.indexOf(".com") < 0) {
+var title = "Suggested site: " + query + ".com";
+var link = "https://" + q + ".com";
+var domain = q + ".com";
+r(title,link,domain);
+
+var title = query + " - Wikipedia";
+var link = "https://en.wikipedia.org/wiki/Special:Search?search=" + query;
+var domain = "en.wikipedia.org";
+r(title,link,domain);
+}
+
+r("Google Search","https://google.com","www.google.com");
 </script>
 </body>
 </html>
