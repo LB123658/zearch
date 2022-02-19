@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zearch results</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<style>
+body {
+background: #e8e8e8;
+text-align: center;
+}
+* {
+font-family: 'Montserrat', sans-serif;
+color: grey;
+}
+::selection {
+background: lightgrey;
+}
+:focus {
+outline: 0;
+}
+#input {
+width: 500px;
+font-size: 18px;
+height: 40px;
+border-radius: 20px;
+background: white;
+padding-left: 15px;
+padding-right: 15px;
+border: none;
+margin: 10px 170px;
+}
+#home {
+font-size: 18px;
+color: red;
+border: 2px solid red;
+border-radius: 20px;
+height: 40px;
+width: 150px;
+cursor: pointer;
+background: transparent;
+position: absolute;
+top: 10px;
+left: 10px;
+}
+#home:hover {
+color: white;
+background: #ff0000;
+}
+#top {
+position: fixed;
+z-index: 1;
+background: #e8e8e8;
+left: 0px;
+top: 0px;
+height: 60px;
+width: 100%;
+overflow: hidden;
+display: flex;
+}
+#results {
+position: absolute;
+top: 100px;
+left: 5%;
+width: 90%;
+}
+#results div {
+width: 100%;
+margin-bottom: 10px;
+border-radius: 20px;
+padding: 15px;
+background: white;
+text-align: left;
+font-size: 18px;
+margin-left: -15px;
+}
+#results div * {
+margin: 5px;
+}
+a {
+color: red;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<div id="top">
+<a href="index.html">
+<button id="home">Zearch</button>
+</a>
+<form action="s">
+<input placeholder="Search something" autocomplete="off" name="q" id="input"></input>
+</form>
+</div>
+
+<div id="results">
+  <div>
+  <p>There are no results for that.</p>
+  <a href="#">Learn more</a>
+  </div>
+</div>
+
+</body>
+</html>
