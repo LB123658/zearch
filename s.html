@@ -78,6 +78,12 @@ margin-left: -15px;
 #results div * {
 margin: 5px;
 }
+#results div img {
+height: 16px;
+width: 16px;
+margin: 0px 0px -1px 0px;
+padding-right: 10px;
+}
 a {
 color: red;
 text-decoration: none;
@@ -100,10 +106,26 @@ text-decoration: underline;
 
 <div id="results">
   <div>
-  <p>There are no results for that.</p>
+  <p>Zearch is currently being updated.</p>
   <a href="#">Learn more</a>
   </div>
 </div>
 
+<script>
+var query = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
+
+var input = document.getElementById("input");
+var results = document.getElementById("results");
+
+input.value = query;
+
+function re(title,link,domain) {
+var x = document.createElement("DIV");
+x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a>";
+results.appendChild(x);
+}
+
+re("Google Search","https://google.com","www.google.com");
+</script>
 </body>
 </html>
