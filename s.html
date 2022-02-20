@@ -148,7 +148,19 @@ r("Yahoo News - Latest News & Headlines","https://news.yahoo.com","news.yahoo.co
 r("Google News","https://news.google.com","news.google.com");
 }
 }
-
+const techWords = ["apple","google","android","iphone","chrome","mac","html"];
+for (let i = 0; i < techWords.length ;i++) {
+if (q.indexOf(techWords[i]) > -1) {
+r("Apple - Official site","https://www.apple.com","www.apple.com");
+r("Google","https://google.com","www.google.com");
+r("Android | The platform pushing what's possible","https://www.android.com","www.android.com");
+r("Google Chromebooks - Laptops, Detachables and Tablets","https://google.com/chromebook","www.google.com/chromebook");
+r("Microsoft – Cloud, Computers, Apps & Gaming","https://microsoft.com","www.microsoft.com");
+r("WIRED - The Latest in Technology, Science, Culture and Business | WIRED","https://wired.com","www.wired.com");
+r("Internet for people, not profit — Mozilla","https://www.mozilla.org/en-US/","www.mozilla.org/en-US");
+r("Chrome - Download the Fast, Secure Browser from Google","https://chrome.google.com","chrome.google.com");
+}
+}
 </script>
 </body>
 </html>
