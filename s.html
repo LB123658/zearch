@@ -163,6 +163,44 @@ var domain = "en.wikipedia.org";
 r(title,link,domain);
 } 
 
+if (q.split(" ")[0] == "google") {
+title = "Google " + q.split(" ")[1];
+link = "https://" + q.split(" ")[1] + "google.com";
+domain = q.split(" ")[1] + "google.com";
+r(title,link,domain);
+} else if (q.split(" ")[0] == "bing") {
+title = "Bing - " + q.split(" ")[1];
+link = "https://" + q.split(" ")[1] + "bing.com";
+domain = q.split(" ")[1] + "bing.com";
+r(title,link,domain);
+} else if (q.split(" ")[0] == "yahoo") {
+title = "Yahoo " + q.split(" ")[1];
+link = "https://" + q.split(" ")[1] + "yahoo.com";
+domain = q.split(" ")[1] + "yahoo.com";
+r(title,link,domain);
+} else if (q.split(" ")[0] == "yandex") {
+title = "Yandex " + q.split(" ")[1];
+link = "https://" + q.split(" ")[1] + "yandex.com";
+domain = q.split(" ")[1] + "yandex.com";
+r(title,link,domain);
+}
+
+const workWords = ["mail","docs","slides","power point","word","sheet","form","call","zoom","classroom","html"]
+for (let i = 0; i < workWords.length ;i++) {
+if (q.indexOf(workWords[i]) > -1) {
+r("Google","https://google.com","www.google.com");
+r("Gmail","https://mail.google.com","mail.google.com");
+r("Google Classroom","https://classroom.google.com","classroom.google.com");
+r("Google Docs: Sign-in","https://docs.google.com","docs.google.com");
+r("Google Slides: Sign-in","https://slides.google.com","slides.google.com");
+r("Google Workspace - Introducing Google Workspace.","https://workspace.google.com","workspace.google.com");
+r("Word Processing Software | Microsoft 365","https://www.microsoft.com/en-us/microsoft-365/word","microsoft.com");
+r("Yahoo Mail","https://mail.yahoo.com","mail.yahoo.com");
+r("Video Conferencing, Cloud Phone, Webinars, Chat, Virtual Events | Zoom","https://zoom.us","zoom.us");
+r("Google Forms: Sign-in","https://forms.google.com","forms.google.com");
+}
+}
+
 const newsWords = ["news","current events","new york times","cnn","nbc","cbs","the washington post","washington post","guardian","yahoo","npr"];
 for (let i = 0; i < newsWords.length ;i++) {
 if (q.indexOf(newsWords[i]) > -1) {
@@ -177,7 +215,7 @@ r("Google News","https://news.google.com","news.google.com");
 r("The Washington Post: Breaking News, World, US, DC News and Analysis","https://www.washingtonpost.com","www.washingtonpost.com");
 }
 }
-const techWords = ["apple","google","android","iphone","chrome","mac","wired","tech","browser","microsoft"];
+const techWords = ["apple","google","android","iphone","chrome","mac","wired","tech","browser","microsoft","app"];
 for (let i = 0; i < techWords.length ;i++) {
 if (q.indexOf(techWords[i]) > -1) {
 r("Apple - Official site","https://www.apple.com","www.apple.com");
@@ -205,7 +243,7 @@ r("Pandora: Music and Podcasts, Free and On-Demand","https://pandora.com","www.p
 r("Deezer | Listen to music | Online music streaming platform","https://deezer.com","www.deezer.com");
 }
 }
-const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin","html"];
+const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin"];
 for (let i = 0; i < socialWords.length ;i++) {
 if (q.indexOf(socialWords[i]) > -1) {
 r("Instagram","https://instgram.com","www.instgram.com");
