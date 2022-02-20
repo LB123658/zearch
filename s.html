@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,6 +164,10 @@ var domain = "en.wikipedia.org";
 r(title,link,domain);
 } 
 
+if (q.search(" ") > 0) {
+google();
+}
+function google() {
 if (q.split(" ")[0] == "google") {
 title = "Google " + q.split(" ")[1];
 link = "https://" + q.split(" ")[1] + ".google.com";
@@ -183,6 +188,7 @@ title = "Yandex " + q.split(" ")[1];
 link = "https://" + q.split(" ")[1] + ".yandex.com";
 domain = q.split(" ")[1] + ".yandex.com";
 r(title,link,domain);
+}
 }
 
 const workWords = ["mail","docs","slides","power point","word","sheet","form","call","zoom","classroom","html"]
@@ -258,6 +264,8 @@ r("WhatsApp","https://whatsapp.com","www.whatsapp.com");
 r("Snapchat - The fastest way to share a moment!","https://snapchat.com","www.snapchat.com");
 }
 }
+
+localStorage.setItem("last",query);
 </script>
 </body>
 </html>
