@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,16 +48,68 @@ button:hover {
 color: white;
 background: #ff0000;
 }
+#complete {
+position: absolute;
+top: 202px;
+left: 50%;
+margin-left: -265px;
+width: 500px;
+font-size: 18px;
+border-radius: 0px 0px 10px 10px;
+background: white;
+padding-left: 15px;
+padding-right: 15px;
+z-index: 1;
+visibility: hidden;
+}
+#complete button {
+width: 100%;
+height: 30px;
+border: none;
+background: transparent;
+color: red;
+text-align: left;
+border-radius: 5px;
+margin-bottom: 5px;
+}
+#complete button:hover {
+background: #e8e8e8;
+cursor: pointer;
+}
 </style>
 </head>
 <body>
 
 <h1>Zearch</h1>
 <form action="s">
-<input placeholder="Search something" autocomplete="off" name="q"></input>
+<input placeholder="Search something" autocomplete="off" name="q" id="input"></input>
 </form>
-<p>The alternative search engine.</p>
+<p id="about">The alternative search engine.</p>
 <br>
-<button>Learn more</button>
+<button onclick="a()">Learn more</button>
+
+<div id="complete"></div>
+<script>
+var input = document.getElementById("input");
+var complete = document.getElementById("complete");
+var about = document.getElementById("about");
+
+function a() {
+about.innerHTML = "The alternative search engine. <br><br> <span style='width:300px'>We are working on having more relevant results for your searches without tracking you.</span>";
+}
+input.onkeyup = function() {auto(); };
+input.focus();
+
+function auto() {
+if (input.value.length > 0) {
+complete.innerHTML = "<a href='https://lb123658.github.io/zearch/s?q=" + input.value + "'><button>" + input.value + "</button></a> <a href='https://lb123658.github.io/zearch/s?q=" + input.value + ".com'><button>" + input.value + ".com</button></a>";
+complete.style.visibility = "visible";
+input.style.borderRadius = "20px 20px 0px 0px";
+} else {
+complete.style.visibility = "hidden";
+input.style.borderRadius = "20px";
+}
+}
+</script>
 </body>
 </html>
