@@ -68,7 +68,7 @@ width: 90%;
 #results div {
 width: 100%;
 margin-bottom: 10px;
-border-radius: 20px;
+border-radius: 10px;
 padding: 15px;
 background: white;
 text-align: left;
@@ -118,9 +118,10 @@ input.value = query;
 
 function r(title,link,domain) {
 var x = document.createElement("DIV");
-x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a>";
+x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a><span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"alert('Zearch is improving its suggestions')\">more_vert</span>";
 results.appendChild(x);
 }
+
 
 if (q.indexOf(" ") < 0 && q.indexOf(".com") < 0) {
 var title = "Suggested site: " + query + ".com";
@@ -132,9 +133,22 @@ var title = query + " - Wikipedia";
 var link = "https://en.wikipedia.org/wiki/Special:Search?search=" + query;
 var domain = "en.wikipedia.org";
 r(title,link,domain);
+} 
+
+const newsWords = ["news","current events","new york times","cnn","nbc","cbs","the washington post","washington post","guardian","post","npr"];
+for (let i = 0; i < newsWords.length ;i++) {
+if (q.indexOf(newsWords[i]) > -1) {
+r("New York Times - The New York Times - Breaking News, US News, World News","https://www.nytimes.com","www.nytimes.com");
+r("CNN - Breaking News, Latest News and Videos","https://www.cnn.com","www.cnn.com");
+r("NPR - Breaking News, Analysis, Music, Arts & Podcasts","https://www.npr.org","www.npr.org");
+r("NBC News - Breaking News & Top Stories","https://www.nbcnews.com","www.nbcnews.com");
+r("CBS News - Breaking news, 24/7 live streaming news","https://www.cbsnews.com","www.cbsnews.com");
+r("News, sport and opinion from the Guardian","https://www.theguardian.com","www.theguardian.com");
+r("Yahoo News - Latest News & Headlines","https://news.yahoo.com","news.yahoo.com");
+r("Google News","https://news.google.com","news.google.com");
+}
 }
 
-r("Google Search","https://google.com","www.google.com");
 </script>
 </body>
 </html>
