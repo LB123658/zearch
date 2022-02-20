@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,56 +52,81 @@ position: absolute;
 top: 202px;
 left: 50%;
 margin-left: -265px;
-width: 500px;
+width: 530px;
 font-size: 18px;
 border-radius: 0px 0px 10px 10px;
 background: white;
-padding-left: 15px;
-padding-right: 15px;
 z-index: 1;
 visibility: hidden;
 }
-#complete button {
+.auto {
 width: 100%;
 height: 30px;
 border: none;
 background: transparent;
 color: red;
 text-align: left;
-border-radius: 5px;
+border-radius: 0px;
 margin-bottom: 5px;
 }
-#complete button:hover {
-background: #e8e8e8;
+.auto:hover {
+background: #faf7f7;
 cursor: pointer;
+color: red;
+}
+.button {
+font-size: 18px;
+color: red;
+border: 2px solid red;
+border-radius: 20px;
+height: 40px;
+width: 150px;
+cursor: pointer;
+background: transparent;
+margin: 10px;
+}
+.button:hover {
+color: white;
+background: #ff0000;
 }
 </style>
 </head>
 <body>
 
 <h1>Zearch</h1>
-<form action="s">
+<form action="s" id="form">
 <input placeholder="Search something" autocomplete="off" name="q" id="input"></input>
 </form>
-<p id="about">The alternative search engine.</p>
+<p>The alternative search engine.</p>
 <br>
-<button onclick="a()">Learn more</button>
+<button type="submit" form="form">Search</button>
 
 <div id="complete"></div>
 <script>
 var input = document.getElementById("input");
 var complete = document.getElementById("complete");
-var about = document.getElementById("about");
 
-function a() {
-about.innerHTML = "The alternative search engine. <br><br> <span style='width:300px'>We are working on having more relevant results for your searches without tracking you.</span>";
+if(localStorage.getItem("last")) {
+var last = localStorage.getItem("last");
+} else {
+var last = "Welcome to Zearch";
 }
+
 input.onkeyup = function() {auto(); };
 input.focus();
 
+function hide() {
+complete.style.visibility = "hidden";
+input.style.borderRadius = "20px";
+}
+
+function lastSearch() {
+location.replace("https://lb123658.github.io/zearch/s?q=" + last.replace(/ /gi, "+"));
+}
+
 function auto() {
 if (input.value.length > 0) {
-complete.innerHTML = "<a href='https://lb123658.github.io/zearch/s?q=" + input.value + "'><button>" + input.value + "</button></a> <a href='https://lb123658.github.io/zearch/s?q=" + input.value + ".com'><button>" + input.value + ".com</button></a>";
+complete.innerHTML = "<button class='auto' type='submit' form='form'>" + input.value + "</button> <button class='auto' onclick='lastSearch()'>" + last + "</button><br><button class='button' type='submit' form='form'>Search</button> <button class='button' onclick='hide();'>Close</button>";
 complete.style.visibility = "visible";
 input.style.borderRadius = "20px 20px 0px 0px";
 } else {
