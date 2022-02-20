@@ -91,6 +91,24 @@ text-decoration: none;
 a:hover {
 text-decoration: underline;
 }
+#shade {
+position: fixed;
+top: 0px;
+left: 0px;
+height: 100%;
+width: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 2;
+visibility: hidden;
+}
+#shade button {
+font-size: 18px;
+padding: 15px;
+border: none;
+border-radius: 10px;
+width: 350px;
+margin-top: 200px;
+}
 </style>
 </head>
 <body>
@@ -106,6 +124,9 @@ text-decoration: underline;
 
 <div id="results"></div>
 
+<div id="shade" onclick="hide()">
+<button><span id="alert">This came up by accident.</span> <br><br><span style="font-size:12px;">Click anywhere to close.</span></button>
+</div>
 <script>
 var query = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
 var q = query.toLowerCase();
@@ -118,10 +139,17 @@ input.value = query;
 
 function r(title,link,domain) {
 var x = document.createElement("DIV");
-x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a><span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"alert('Zearch is improving its suggestions')\">more_vert</span>";
+x.innerHTML = "<p><img src='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + link + "'></img>" + title + "</p><a href='" + link + "'>" + domain + "</a><span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('This Zearch suggestion is from " + domain + "')\">more_vert</span>";
 results.appendChild(x);
 }
 
+function notify(text) {
+document.getElementById("alert").innerHTML = text;
+document.getElementById("shade").style.visibility = "visible";
+}
+function hide() {
+document.getElementById("shade").style.visibility = "hidden";
+}
 
 if (q.indexOf(" ") < 0 && q.indexOf(".com") < 0) {
 var title = "Suggested site: " + query + ".com";
@@ -148,7 +176,7 @@ r("Yahoo News - Latest News & Headlines","https://news.yahoo.com","news.yahoo.co
 r("Google News","https://news.google.com","news.google.com");
 }
 }
-const techWords = ["apple","google","android","iphone","chrome","mac","html"];
+const techWords = ["apple","google","android","iphone","chrome","mac","wired","tech","browser","microsoft"];
 for (let i = 0; i < techWords.length ;i++) {
 if (q.indexOf(techWords[i]) > -1) {
 r("Apple - Official site","https://www.apple.com","www.apple.com");
@@ -159,6 +187,18 @@ r("Microsoft – Cloud, Computers, Apps & Gaming","https://microsoft.com","www.m
 r("WIRED - The Latest in Technology, Science, Culture and Business | WIRED","https://wired.com","www.wired.com");
 r("Internet for people, not profit — Mozilla","https://www.mozilla.org/en-US/","www.mozilla.org/en-US");
 r("Chrome - Download the Fast, Secure Browser from Google","https://chrome.google.com","chrome.google.com");
+}
+}
+const musicWords = ["music","lyrics","song","listen","spotify","podcast","sound","rap","pandora","html"];
+for (let i = 0; i < musicWords.length ;i++) {
+if (q.indexOf(musicWords[i]) > -1) {
+r("Spotify - Web Player: Music for everyone","https://open.spotify.com","open.spotify.com");
+r("Apple Music","https://beta.music.apple.com/us/browse","beta.music.apple.com/us/browse");
+r("Amazon Music Unlimited | Stream 75 Million Songs & Podcasts","https://music.amazon.com","music.amazon.com");
+r("YouTube Music","https://music.youtube.com","music.youtube.com");
+r("Stream and listen to music online for free with SoundCloud","https://soundcloud.com","soundcloud.com");
+r("Pandora: Music and Podcasts, Free and On-Demand","https://pandora.com","www.pandora.com");
+r("Deezer | Listen to music | Online music streaming platform","https://deezer.com","www.deezer.com");
 }
 }
 </script>
