@@ -163,7 +163,7 @@ var domain = "en.wikipedia.org";
 r(title,link,domain);
 } 
 
-const newsWords = ["news","current events","new york times","cnn","nbc","cbs","the washington post","washington post","guardian","post","npr"];
+const newsWords = ["news","current events","new york times","cnn","nbc","cbs","the washington post","washington post","guardian","yahoo","npr"];
 for (let i = 0; i < newsWords.length ;i++) {
 if (q.indexOf(newsWords[i]) > -1) {
 r("New York Times - The New York Times - Breaking News, US News, World News","https://www.nytimes.com","www.nytimes.com");
@@ -174,6 +174,7 @@ r("CBS News - Breaking news, 24/7 live streaming news","https://www.cbsnews.com"
 r("News, sport and opinion from the Guardian","https://www.theguardian.com","www.theguardian.com");
 r("Yahoo News - Latest News & Headlines","https://news.yahoo.com","news.yahoo.com");
 r("Google News","https://news.google.com","news.google.com");
+r("The Washington Post: Breaking News, World, US, DC News and Analysis","https://www.washingtonpost.com","www.washingtonpost.com");
 }
 }
 const techWords = ["apple","google","android","iphone","chrome","mac","wired","tech","browser","microsoft"];
@@ -184,21 +185,39 @@ r("Google","https://google.com","www.google.com");
 r("Android | The platform pushing what's possible","https://www.android.com","www.android.com");
 r("Google Chromebooks - Laptops, Detachables and Tablets","https://google.com/chromebook","www.google.com/chromebook");
 r("Microsoft – Cloud, Computers, Apps & Gaming","https://microsoft.com","www.microsoft.com");
-r("WIRED - The Latest in Technology, Science, Culture and Business | WIRED","https://wired.com","www.wired.com");
+r("Google Play","https://play.google.com/store","play.google.com");
+r("App Store - Apple","https://apps.apple.com/us/app","apps.apple.com");
 r("Internet for people, not profit — Mozilla","https://www.mozilla.org/en-US/","www.mozilla.org/en-US");
 r("Chrome - Download the Fast, Secure Browser from Google","https://chrome.google.com","chrome.google.com");
+r("WIRED - The Latest in Technology, Science, Culture and Business | WIRED","https://wired.com","www.wired.com");
 }
 }
-const musicWords = ["music","lyrics","song","listen","spotify","podcast","sound","rap","pandora","html"];
+const musicWords = ["music","lyrics","song","listen","spotify","podcast","sound","rap","pandora","web player","play"];
 for (let i = 0; i < musicWords.length ;i++) {
 if (q.indexOf(musicWords[i]) > -1) {
 r("Spotify - Web Player: Music for everyone","https://open.spotify.com","open.spotify.com");
-r("Apple Music","https://beta.music.apple.com/us/browse","beta.music.apple.com/us/browse");
+r("Apple Music","https://beta.music.apple.com/us/browse","beta.music.apple.com");
 r("Amazon Music Unlimited | Stream 75 Million Songs & Podcasts","https://music.amazon.com","music.amazon.com");
 r("YouTube Music","https://music.youtube.com","music.youtube.com");
 r("Stream and listen to music online for free with SoundCloud","https://soundcloud.com","soundcloud.com");
+r("Genius | Song Lyrics & Knowledge","https://genius.com","genius.com");
 r("Pandora: Music and Podcasts, Free and On-Demand","https://pandora.com","www.pandora.com");
 r("Deezer | Listen to music | Online music streaming platform","https://deezer.com","www.deezer.com");
+}
+}
+const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin","html"];
+for (let i = 0; i < socialWords.length ;i++) {
+if (q.indexOf(socialWords[i]) > -1) {
+r("Instagram","https://instgram.com","www.instgram.com");
+r("Facebook - Log In or Sign Up","https://facebook.com","www.facebook.com");
+r("Twitter. It's what's happening / Twitter","https://twitter.com","twitter.com");
+r("Make Your Day - TikTok","https://www.tiktok.com","www.tiktok.com");
+r("YouTube","https://youtube.com","www.youtube.com");
+r("Reddit - Dive into anything","https://www.reddit.com","www.reddit.com");
+r("LinkedIn: Log In or Sign Up","https://linkedin.com","www.linkedin.com");
+r("Pinterest","https://pinterest.com","www.pinterest.com");
+r("WhatsApp","https://whatsapp.com","www.whatsapp.com");
+r("Snapchat - The fastest way to share a moment!","https://snapchat.com","www.snapchat.com");
 }
 }
 </script>
