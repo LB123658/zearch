@@ -364,7 +364,6 @@ console.log("Time and page recorded");
 function showHistory() {
 results.innerHTML = "<div><p>Your search history <span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history is never shared with anyone')\">more_vert</span></p></div>" + localStorage.getItem("zearch_history").replace("null","");
 document.getElementsByTagName("title")[0].innerHTML = "Search history";
-input.remove();
 feed.innerHTML = "<p>Your search history <span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history is never shared with anyone')\">more_vert</span></p><br><button class='red' onclick='clearHistory()'>Delete</button>";
 }
 function clearHistory() {
