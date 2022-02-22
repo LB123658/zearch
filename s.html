@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +66,7 @@ left: 5%;
 width: 90%;
 }
 #results div {
-width: 100%;
+width: 60%;
 margin-bottom: 10px;
 border-radius: 10px;
 padding: 15px;
@@ -110,6 +109,36 @@ border-radius: 10px;
 width: 350px;
 margin-top: 200px;
 }
+#feed {
+position: absolute;
+top: 100px;
+right: 5%;
+width: 25%;
+margin-bottom: 10px;
+border-radius: 10px;
+padding: 15px;
+background: white;
+text-align: left;
+font-size: 18px;
+margin-left: -15px;
+}
+#feed * {
+margin: 5px;
+}
+.red {
+font-size: 18px;
+color: red;
+border: 2px solid red;
+border-radius: 20px;
+height: 40px;
+width: 150px;
+cursor: pointer;
+background: transparent;
+}
+.red:hover {
+color: white;
+background: #ff0000;
+}
 </style>
 </head>
 <body>
@@ -124,6 +153,14 @@ margin-top: 200px;
 </div>
 
 <div id="results"></div>
+<div id="feed">
+<p>Zearch is improving its suggestions. If these aren't helpful try again later.</p>
+<br>
+<a href="index.html">
+<button class="red">Homepage</button>
+</a>
+<span class="material-icons" style="float:right;user-select:none;cursor:pointer;" onclick="notify('Zearch info panel');">more_vert</span>
+</div>
 
 <div id="shade" onclick="hide()">
 <button><span id="alert">This came up by accident.</span> <br><br><span style="font-size:12px;">Click anywhere to close.</span></button>
@@ -270,6 +307,10 @@ localStorage.setItem("last",query);
 if (q == "welcome to zearch") {
     r("Zearch is a new inpednendent search engine that respects your privacy.","https://lb123658.github.io/zearch","lb123658.github.io");
 }
+
+
+// page title 
+document.getElementsByTagName("title")[0].innerHTML = query + " - Zearch";
 </script>
 </body>
 </html>
