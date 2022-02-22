@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,6 +140,36 @@ background: transparent;
 color: white;
 background: #ff0000;
 }
+#history {
+position: absolute;
+top: 10px;
+right: 10px;
+}
+#account {
+position: absolute;
+top: 10px;
+right: 170px;
+}
+@media screen and (max-width: 1030px) {
+  #account {
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 870px) {
+  #history {
+    visibility: hidden;
+  }
+  #home {
+    left: 5%;
+    width: 20%;
+  }
+  #input {
+    position: absolute;
+    margin: 0px;
+    top: 10px;
+    left: 26%;
+    width: 65%;
+{
 </style>
 </head>
 <body>
@@ -150,6 +181,9 @@ background: #ff0000;
 <form action="s">
 <input placeholder="Search something" autocomplete="off" name="q" id="input"></input>
 </form>
+<button class="red" id="history" onclick="showHistory()">History</button>
+<button class="red" id="account">Account</button>
+
 </div>
 
 <div id="results"></div>
@@ -302,15 +336,30 @@ r("Snapchat - The fastest way to share a moment!","https://snapchat.com","www.sn
 }
 }
 
-localStorage.setItem("last",query);
-  
 if (q == "welcome to zearch") {
     r("Zearch is a new inpednendent search engine that respects your privacy.","https://lb123658.github.io/zearch","lb123658.github.io");
 }
 
 
-// page title 
+// page title, redirect, and search history
 document.getElementsByTagName("title")[0].innerHTML = query + " - Zearch";
+
+if (location.search.length < 4) {
+location.replace("https://lb123658.github.io/zearch");
+}
+
+localStorage.setItem("last",query);
+
+var d = new Date();
+const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var userData = "<div><p><a href='https://lb123658.github.io/zearch/s?q=" + query + "' target='_blank'>" + query + "</a> - " + d.toLocaleTimeString() + " " + days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate() + "</p></div>";
+localStorage.setItem("zearch_history",userData + localStorage.getItem("zearch_history"));
+console.log("Time and page recorded");
+
+function showHistory() {
+results.innerHTML = "<div><p>Your search history <span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history is never shared with anyone')\">more_vert</span></p></div>" + localStorage.getItem("zearch_history").replace("null","");
+}
 </script>
 </body>
 </html>
