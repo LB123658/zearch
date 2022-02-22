@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -206,6 +205,7 @@ var q = query.toLowerCase();
 
 var input = document.getElementById("input");
 var results = document.getElementById("results");
+var feed = document.getElementById("feed");
 
 input.value = query;
 
@@ -262,7 +262,7 @@ r(title,link,domain);
 }
 }
 
-const workWords = ["mail","docs","slides","power point","word","sheet","form","call","zoom","classroom","html"]
+const workWords = ["mail","docs","slides","power point","word","sheet","form","call","zoom","classroom"]
 for (let i = 0; i < workWords.length ;i++) {
 if (q.indexOf(workWords[i]) > -1) {
 r("Google","https://google.com","www.google.com");
@@ -344,8 +344,12 @@ if (q == "welcome to zearch") {
 // page title, redirect, and search history
 document.getElementsByTagName("title")[0].innerHTML = query + " - Zearch";
 
-if (location.search.length < 4) {
+if (location.href.length < 39) {
 location.replace("https://lb123658.github.io/zearch");
+}
+
+if (window.location.hash == "#history") {
+showHistory();
 }
 
 localStorage.setItem("last",query);
@@ -353,12 +357,19 @@ localStorage.setItem("last",query);
 var d = new Date();
 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-var userData = "<div><p><a href='https://lb123658.github.io/zearch/s?q=" + query + "' target='_blank'>" + query + "</a> - " + d.toLocaleTimeString() + " " + days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate() + "</p></div>";
+var userData = "<div><p><a href='https://lb123658.github.io/zearch/s?q=" + query.replace(/ /gi,"+") + "' target='_blank'>" + query + "</a> - " + d.toLocaleTimeString() + " " + days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate() + "</p></div>";
 localStorage.setItem("zearch_history",userData + localStorage.getItem("zearch_history"));
 console.log("Time and page recorded");
 
 function showHistory() {
 results.innerHTML = "<div><p>Your search history <span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history is never shared with anyone')\">more_vert</span></p></div>" + localStorage.getItem("zearch_history").replace("null","");
+document.getElementsByTagName("title")[0].innerHTML = "Search history";
+input.remove();
+feed.innerHTML = "<p>Your search history <span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history is never shared with anyone')\">more_vert</span></p><br><button class='red' onclick='clearHistory()'>Delete</button>";
+}
+function clearHistory() {
+localStorage.setItem("zearch_history","<div><p>History cleared.<span class='material-icons' style='float:right;user-select:none;cursor:pointer;' onclick=\"notify('Your search history was cleared')\">more_vert</span></p></div>");
+showHistory();
 }
 </script>
 </body>
