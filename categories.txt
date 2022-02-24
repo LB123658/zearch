@@ -1,7 +1,7 @@
-work/school
+work
 news
 tech
-social media
+social
 medical
 entertainment
 shopping
