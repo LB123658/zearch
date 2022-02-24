@@ -97,6 +97,19 @@ text-decoration: none;
 a:hover {
 text-decoration: underline;
 }
+#userdata {
+width: 100%;
+margin: 0px;
+min-height: 100px;
+text-align: center;
+background: white;
+border: none;
+border-radius: 15px;
+padding: 10px 0px 10px 0px;
+}
+#userdata h2 {
+margin: 5px;
+}
 @keyframes shake {
   0% {transform: translate(-10px,0px)}
   10% {transform: translate(0px,0px)}
@@ -120,11 +133,13 @@ text-decoration: underline;
 <a href="index.html">
 <button>Homepage</button>
 </a>
-<a href="s#history">
-<button>Search history</button>
-</a>
-<br><br>
 <button onclick="signOut()">Sign out</button>
+<br><br>
+
+<div id="userdata">
+<h2>Search Data</h2>
+</div>
+
 </div>
 
 <!-- sign in or create account -->
@@ -177,6 +192,8 @@ var data = document.getElementById("data");
 var greeting = document.getElementById("greeting");
 var since = document.getElementById("since");
 
+var userdata = document.getElementById("userdata");
+
 function signIn() {
 one.remove();
 }
@@ -204,6 +221,16 @@ var accountDate = months[d.getMonth()] + " 2021";
 localStorage.setItem("zearch_since",accountDate);
 three.remove();
 localStorage.setItem("zearch_status","in");
+//make search categories
+localStorage.setItem("work","0");
+localStorage.setItem("tech","0");
+localStorage.setItem("news","0");
+localStorage.setItem("social","0");
+localStorage.setItem("medical","0");
+localStorage.setItem("entertainment","0");
+localStorage.setItem("shopping","0");
+// make search count storage
+localStorage.setItem("search_count","0");
 }
 function revealPassword() {
 alert("Your password is: " + localStorage.getItem("zearch_password"));
@@ -223,6 +250,7 @@ function signOut() {
 localStorage.setItem("zearch_status","out");
 location.reload();
 }
+
 </script>
 </body>
 </html>
