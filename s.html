@@ -352,7 +352,10 @@ location.replace("https://lb123658.github.io/zearch");
 }
 
 localStorage.setItem("last",query);
-
+  
+localStorage.setItem("search_count", +localStorage.getItem("search_count") + 1);
+console.log("Search number recorded");
+  
 var d = new Date();
 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
