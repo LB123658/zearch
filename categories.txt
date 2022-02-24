@@ -1,0 +1,7 @@
+work/school
+news
+tech
+social media
+medical
+entertainment
+shopping
