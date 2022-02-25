@@ -150,6 +150,49 @@ position: absolute;
 top: 10px;
 right: 170px;
 }
+#complete {
+position: absolute;
+top: 50px;
+left: 170px;
+width: 530px;
+font-size: 18px;
+border-radius: 0px 0px 10px 10px;
+background: white;
+z-index: 1;
+visibility: hidden;
+box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.auto {
+width: 100%;
+height: 30px;
+border: none;
+background: transparent;
+color: red;
+text-align: left;
+border-radius: 0px;
+margin-bottom: 5px;
+font-size: 18px;
+}
+.auto:hover {
+background: #faf7f7;
+cursor: pointer;
+color: red;
+}
+.button {
+font-size: 18px;
+color: red;
+border: 2px solid red;
+border-radius: 20px;
+height: 40px;
+width: 150px;
+cursor: pointer;
+background: transparent;
+margin: 10px;
+}
+.button:hover {
+color: white;
+background: #ff0000;
+}
 @media screen and (max-width: 1030px) {
   #account {
     visibility: hidden;
@@ -169,7 +212,15 @@ right: 170px;
     top: 10px;
     left: 26%;
     width: 65%;
-{
+  }
+  #complete {
+    position: absolute;
+    margin: 0px;
+    top: 50px;
+    left: 26%;
+    width: 69%;
+  }
+}
 </style>
 </head>
 <body>
@@ -178,7 +229,7 @@ right: 170px;
 <a href="index.html">
 <button id="home">Zearch</button>
 </a>
-<form action="s.html">
+<form action="s.html" id="form">
 <input placeholder="Search something" autocomplete="off" name="q" id="input"></input>
 </form>
 <button class="red" id="history" onclick="showHistory()">History</button>
@@ -186,6 +237,9 @@ right: 170px;
 <button class="red" id="account">Account</button>
 </a>
 </div>
+
+<div id="complete"></div>
+
 
 <div id="results"></div>
 <div id="feed">
@@ -200,6 +254,7 @@ right: 170px;
 <div id="shade" onclick="hide()">
 <button><span id="alert">This came up by accident.</span> <br><br><span style="font-size:12px;">Click anywhere to close.</span></button>
 </div>
+
 <script>
 var query = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
 var q = query.toLowerCase();
@@ -433,6 +488,40 @@ showHistory();
 function clipboard(copyText) {
 navigator.clipboard.writeText(copyText);
 notify("Link copied");
+}
+
+
+// autocomplete suggestions
+var complete = document.getElementById("complete");
+
+if(localStorage.getItem("last")) {
+var last = localStorage.getItem("last");
+} else {
+var last = "Welcome to Zearch";
+}
+
+input.onkeyup = function() {auto(); };
+input.focus();
+document.body.onresize = function() {deleteAuto(); };
+
+function hid() {
+complete.style.visibility = "hidden";
+input.style.borderRadius = "20px";
+}
+
+function lastSearch() {
+location.replace("https://lb123658.github.io/zearch/s.html?q=" + last.replace(/ /gi, "+"));
+}
+
+function auto() {
+if (input.value.length > 0) {
+complete.innerHTML = "<button class='auto' type='submit' form='form'>" + input.value + "</button> <button class='auto' onclick='lastSearch()'>" + last + "</button><br><button class='button' type='submit' form='form'>Search</button> <button class='button' onclick='hid();'>Close</button>";
+complete.style.visibility = "visible";
+input.style.borderRadius = "20px 20px 0px 0px";
+} else {
+complete.style.visibility = "hidden";
+input.style.borderRadius = "20px";
+}
 }
 </script>
 </body>
