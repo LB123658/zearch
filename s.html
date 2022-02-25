@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,6 +225,15 @@ function hide() {
 document.getElementById("shade").style.visibility = "hidden";
 }
 
+// for searched urls
+if (q.indexOf(" ") < 0 && q.indexOf(".") > -1) {
+var title = "Suggested site:" + query;
+var link = "https://" + q;
+var domain = q;
+r(title,link,domain);
+}
+
+// for individual word searches
 if (q.indexOf(" ") < 0 && q.indexOf(".com") < 0) {
 var title = "Suggested site: " + query + ".com";
 var link = "https://" + q + ".com";
@@ -330,7 +338,7 @@ localStorage.setItem("music",+localStorage.getItem("music") + 1);
 const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin","social","media","chat","share"];
 for (let i = 0; i < socialWords.length ;i++) {
 if (q.indexOf(socialWords[i]) > -1) {
-r("Instagram","https://instgram.com","www.instgram.com");
+r("Instagram","https://instagram.com","www.instagram.com");
 r("Facebook - Log In or Sign Up","https://facebook.com","www.facebook.com");
 r("Twitter. It's what's happening / Twitter","https://twitter.com","twitter.com");
 r("Make Your Day - TikTok","https://www.tiktok.com","www.tiktok.com");
@@ -343,7 +351,7 @@ r("Snapchat - The fastest way to share a moment!","https://snapchat.com","www.sn
 localStorage.setItem("social",+localStorage.getItem("social") + 1);
 }
 }
-const medicalWords = ["med","health","symptoms","md","doctor","hospital","clinic","emergency","disease","treatment","covid","coronavirus","virus","cases","html"];
+const medicalWords = ["med","health","symptoms","md","doctor","hospital","clinic","emergency","disease","treatment","covid","coronavirus","virus","cases"];
 for (let i = 0; i < medicalWords.length ;i++) {
 if (q.indexOf(medicalWords[i]) > -1) {
 r("Covid-19 World Map: Cases, Deaths and Global Trends - The New York Times","https://www.nytimes.com/interactive/2021/world/covid-cases.html","www.nytimes.com");
@@ -353,6 +361,23 @@ r("Symptoms - Symptoms - Mayo Clinic","https://www.mayoclinic.org/symptoms","www
 r("Drugs.com | Prescription Drug Information, Interactions &amp; Side Effects","https://www.drugs.com","www.drugs.com");
 r("Medicare.gov: the official U.S. government site for Medicare | Medicare","https://www.medicare.gov","www.medicare.gov");
 localStorage.setItem("medical",+localStorage.getItem("medical") + 1);
+}
+}
+const entertainmentWords = ["entertainment","movies","shows","streaming","netflix","disney","hbo","hulu","youtube","videos","paramount","imdb","fandom","games"];
+for (let i = 0; i < entertainmentWords.length ;i++) {
+if (q.indexOf(entertainmentWords[i]) > -1) {
+r("YouTube","https://youtube.com","www.youtube.com");
+r("Netflix - Watch TV Shows Online, Watch Movies Online","https://www.netflix.com","www.netflix.com");
+r("IMDb: Ratings, Reviews, and Where to Watch the Best Movies &amp; TV Shows","https://www.imdb.com","www.imdb.com");
+r("HBO Max","https://www.hbomax.com","www.hbomax.com");
+r("Disney+ - The Best Stories in One Place","https://www.disneyplus.com","www.disneyplus.com");
+r("Hulu: Stream TV and Movies Live and Online","https://www.hulu.com","www.hulu.com");
+r("Paramount Plus - Stream Live TV, Movies, Originals, Sports, News, and more","https://www.paramountplus.com","www.paramountplus.com");
+r("Fandom","https://www.fandom.com","www.fandom.com");
+r("Games - The New York Times","https://www.nytimes.com/crosswords","www.nytimes.com");
+r("Epic Games Store | Download &amp; Play PC Games, Mods, DLC &amp; More – Epic Games","https://www.epicgames.com","www.epicgames.com");
+r("Online Games on Poki — Let&#x27;s play","https://poki.com","poki.com");
+localStorage.setItem("entertainment",+localStorage.getItem("entertainment") + 1);
 }
 }
 
