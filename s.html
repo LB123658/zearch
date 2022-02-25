@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -326,7 +327,7 @@ r("Deezer | Listen to music | Online music streaming platform","https://deezer.c
 localStorage.setItem("music",+localStorage.getItem("music") + 1);
 }
 }
-const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin"];
+const socialWords = ["post","tweet","twitter","instagram","facebook","insta","tik","profile","account","snapchat","reddit","youtube","linkedin","whatsapp","pinterest","pin","social","media","chat","share"];
 for (let i = 0; i < socialWords.length ;i++) {
 if (q.indexOf(socialWords[i]) > -1) {
 r("Instagram","https://instgram.com","www.instgram.com");
@@ -342,7 +343,20 @@ r("Snapchat - The fastest way to share a moment!","https://snapchat.com","www.sn
 localStorage.setItem("social",+localStorage.getItem("social") + 1);
 }
 }
+const medicalWords = ["med","health","symptoms","md","doctor","hospital","clinic","emergency","disease","treatment","covid","coronavirus","virus","cases","html"];
+for (let i = 0; i < medicalWords.length ;i++) {
+if (q.indexOf(medicalWords[i]) > -1) {
+r("Covid-19 World Map: Cases, Deaths and Global Trends - The New York Times","https://www.nytimes.com/interactive/2021/world/covid-cases.html","www.nytimes.com");
+r("WebMD - Better information. Better health.","https://www.webmd.com","www.webmd.com");
+r("Healthgrades | Find a Doctor - Doctor Reviews - Online Doctor Appointments","https://www.healthgrades.com","www.healthgrades.com");
+r("Symptoms - Symptoms - Mayo Clinic","https://www.mayoclinic.org/symptoms","www.mayoclinic.org");
+r("Drugs.com | Prescription Drug Information, Interactions &amp; Side Effects","https://www.drugs.com","www.drugs.com");
+r("Medicare.gov: the official U.S. government site for Medicare | Medicare","https://www.medicare.gov","www.medicare.gov");
+localStorage.setItem("medical",+localStorage.getItem("medical") + 1);
+}
+}
 
+// welcome to search result
 if (q == "welcome to zearch") {
     r("Zearch is a new inpednendent search engine that respects your privacy.","https://lb123658.github.io/zearch","lb123658.github.io");
 }
