@@ -227,14 +227,14 @@ document.getElementById("shade").style.visibility = "hidden";
 
 // for searched urls
 if (q.indexOf(" ") < 0 && q.indexOf(".") > -1) {
-var title = "Suggested site:" + query;
+var title = "Suggested site: " + query;
 var link = "https://" + q;
 var domain = q;
 r(title,link,domain);
 }
 
 // for individual word searches
-if (q.indexOf(" ") < 0 && q.indexOf(".com") < 0) {
+if (q.indexOf(" ") < 0 && q.indexOf(".") < 0) {
 var title = "Suggested site: " + query + ".com";
 var link = "https://" + q + ".com";
 var domain = q + ".com";
@@ -378,6 +378,18 @@ r("Games - The New York Times","https://www.nytimes.com/crosswords","www.nytimes
 r("Epic Games Store | Download &amp; Play PC Games, Mods, DLC &amp; More – Epic Games","https://www.epicgames.com","www.epicgames.com");
 r("Online Games on Poki — Let&#x27;s play","https://poki.com","poki.com");
 localStorage.setItem("entertainment",+localStorage.getItem("entertainment") + 1);
+}
+}
+const shoppingWords = ["shopping","sale","product","buy","purchase","amazon","ebay","etsy","depop","thredup","shop","store","shoe","sweater","pants","jacket","coat","goat","sneakers","gift"];
+for (let i = 0; i < shoppingWords.length ;i++) {
+if (q.indexOf(shoppingWords[i]) > -1) {
+r("Amazon.com. Spend less. Smile more.","https://www.amazon.com","www.amazon.com");
+r("eBay: Electronics, Cars, Fashion, Collectibles & More","https://www.ebay.com","www.ebay.com");
+r("Etsy - Official Site","https://www.etsy.com","www.etsy.com");
+r("Google Shopping - Shop Online, Compare Prices &amp; Where to Buy","https://shopping.google.com","shopping.google.com");
+r("Depop - buy, sell, discover unique fashion","https://www.depop.com","www.depop.com");
+r("GOAT: Sneakers, Apparel, Accessories","https://www.goat.com","www.goat.com");
+r("thredUP | An Online Consignment &amp; Thrift Store","https://www.thredup.com","www.thredup.com");
 }
 }
 
