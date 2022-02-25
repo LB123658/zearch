@@ -3,5 +3,5 @@ news ✅
 tech ✅
 social ✅
 medical ✅
-entertainment
+entertainment ✅
 shopping
