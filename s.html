@@ -528,6 +528,14 @@ input.style.borderRadius = "20px";
 if (results.innerHTML.length == 0) {
 r("No results came up for that search","https://lb123658.github.io/zearch/index.html","Try again");
 }
+
+// security
+const blockedWords = ["trump","truth social","parler","gab","gettr","maga","qanon","q anon","dark web","joe manchin","kyrsten sinema","fox news","infowars","conspiracy","tucker carlson","brandon"];
+for (let i = 0; i < blockedWords.length ;i++) {
+if (q.indexOf(blockedWords[i]) > -1) {
+  location.replace("security.html");
+}
+}
 </script>
 </body>
 </html>
