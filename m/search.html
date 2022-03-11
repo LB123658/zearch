@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zearch mobile</title>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<style>
+::selection {
+  background: #282828;
+}
+:focus {
+  outline: 0;
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+body {
+  background: #202124;
+  overflow-x: hidden;
+}
+a, p, h1, h2, span, input, div {
+  color: #8ab4f8;
+  background: transparent;
+}
+a, p, span, input, div {
+  color: #8ab4f8;
+  background: transparent;
+  font-size: 16px;
+}
+button {
+  padding: 10px 0px 10px 0px;
+  border: 1.5px solid #8ab4f8;
+  font-size: 16px;
+  transition: background 0.4s;
+  font-size: 50px;
+}
+button:hover {
+  background: #2b313b;
+  cursor: pointer;
+}
+button:focus {
+  background: transparent;
+}
+.b {
+  width: 100%;
+  width: 95%;
+  background: transparent;
+  border-radius: 5px;
+  color: #8ab4f8;
+  margin-top: 10px;
+}
+#top {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 120px;
+  width: 100%;
+  background: #202124;
+  border-bottom: 1.5px solid #383838;
+  text-align: center;
+  z-index: 1;
+}
+#top input {
+  height: 100px;
+  margin-top: 10px;
+  border: none;
+  background: #333438;
+  border-radius: 20px;
+  width: 95%;
+  padding: 0px 10px 0px 10px;
+  font-size: 50px;
+}
+#results {
+  position: absolute;
+  top: 140px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+}
+#loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px -50px;
+  border-radius: 50%;
+  border: 10px solid #8ab4f8;
+  border-top: 10px solid transparent;
+  z-index; 2;
+  visibility: hidden;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<div id="top">
+  <form action="search">
+  <input type="text" autocomplete="off" placeholder="Search" id="s" name="q"/>
+  </form>
+</div>
+
+<div id="results"></div>
+
+<div id="loader"></div>
+<script>
+var results = document.getElementById("results");
+var loader = document.getElementById("loader");
+
+var s = document.getElementById("s");
+const library = ["https://google.com","https://youtube.com","https://facebook.com","https://netflix.com","https://microsoft.com","https://twitter.com","https://instagram.com","https://baidu.com","https://linkedin.com","https://wikipedia.org","https://apple.com","https://qq.com","https://amazon.com","https://yahoo.com","https://live.com","https://googletagmanager.com","https://wordpress.org","https://netflix.net","https://bilibili.com","https://youtu.be","https://pinterest.com","https://github.com","https://taobao.com","https://reddit.com","https://zhihu.com","https://whatsapp.com","https://bing.com","https://vimeo.com","https://office.com","https://adobe.com","https://microsoftonline.com","https://zoom.us","https://windowsupdate.com","https://amazonaws.com","https://wordpress.com","https://goo.gl","https://doubleclick.net","https://bit.ly","https://googleusercontent.com","https://weibo.com","https://sina.com.cn","https://blogspot.com","https://mozilla.org","https://msn.com","https://tmall.com","https://chaturbate.com","https://macromedia.com","https://sohu.com","https://vk.com","https://tumblr.com","https://csdn.net","https://google-analytics.com","https://jd.com","https://nytimes.com","https://t.co","https://paypal.com","https://skype.com","https://google.com.hk","https://europa.eu","https://office.com","https://nih.gov","https://flickr.com","https://medium.com","https://spotify.com","https://twitch.tv","https://cnn.com","https://gravatar.com","https://canva.com","https://dropbox.com","https://tiktok.com","https://soundcloud.com","https://lencr.org","https://myshopify.com","https://apache.org","https://stackoverflow.com","https://akadns.net","https://naver.com","https://forbes.com","https://imdb.com","https://bbc.com","https://cloudflare.com","https://theguardian.com","https://icloud.com","https://archive.org","https://ebay.com","https://yahoo.co.jp","https://bbc.co.uk","https://w.org","https://digicert.com","https://akamaiedge.net","https://github.io","https://amazon.in","https://t.me","https://sourceforge.net","https://pornhub.com","https://aliexpress.com","https://yandex.ru","https://douban.com","https://forms.gle","https://office.net","https://sharepoint.com","https://miit.gov.cn","https://alipay.com","https://bongacams.com","https://etsy.com","https://fandom.com","https://aparat.com","https://xvideos.com","https://sciencedirect.com","https://reuters.com","https://quora.com","https://creativecommons.org","https://who.int","https://force.com","https://issuu.com","https://weebly.com","https://outlook.com","https://cnblogs.com","https://mail.ru","https://washingtonpost.com","https://wixsite.com","https://aaplimg.com","https://cdc.gov","https://windows.net","https://okezone.com","https://sogou.com","https://oracle.com","https://amazon.co.jp","https://wsj.com","https://wikimedia.org","https://indeed.com","https://google.co.in","https://imgur.com","https://blogger.com","https://googlesyndication.com","https://researchgate.net","https://tinyurl.com","https://bloomberg.com","https://wix.com","https://aliyun.com","https://googleadservices.com","https://dailymail.co.uk","https://apple-dns.net","https://amazon.co.uk","https://opera.com","https://harvard.edu","https://businessinsider.com","https://youtube-nocookie.com","https://hao.com","https://godaddy.com","https://so.com","https://ytimg.com","https://mit.edu","https://slideshare.net","https://google.cn","https://wp.com","https://wiley.com","https://booking.com","https://xhamster.com","https://php.net","https://duckduckgo.com","https://youku.com","https://wa.me","https://alibaba.com","https://cnbc.com","https://discord.com","https://ok.ru","https://telegram.org","https://pikiran-rakyat.com","https://windows.com","https://nature.com","https://google.de","https://list-manage.com","https://cloudfront.net","https://ibm.com","https://shopify.com","https://bitly.com","https://fbcdn.net","https://un.org","https://go.com","https://gnu.org","https://twimg.com","https://samsung.com","https://stanford.edu","https://unsplash.com","https://tradingview.com","https://usatoday.com","https://googlevideo.com","https://springer.com","https://tribunnews.com","https://app-measurement.com","https://cnet.com","https://hp.com","https://www.gov.uk","https://doi.org","https://behance.net","https://liputan.com","https://intuit.com","https://fiverr.com","https://indiatimes.com","https://nasa.gov","https://walmart.com","https://instructure.com","https://aol.com","https://grammarly.com","https://amazon.de","https://telegraph.co.uk","https://nginx.org","https://eventbrite.com","https://yelp.com","https://npr.org","https://youdao.com","https://google.co.uk","https://google.co.jp","https://freepik.com","https://coinmarketcap.com","https://time.com","https://themeforest.net","https://surveymonkey.com","https://gvt.com","https://tencent.com","https://iqiyi.com","https://foxnews.com","https://slack.com","https://zendesk.com","https://dailymotion.com","https://hubspot.com","https://nginx.com","https://mailchimp.com","https://rakuten.co.jp","https://goodreads.com","https://ted.com","https://cpanel.net","https://akamai.net","https://trello.com","https://spankbang.com","https://scorecardresearch.com","https://udemy.com","https://wschools.com","https://flipkart.com","https://consortiumeducation.com","https://independent.co.uk","https://addtoany.com","https://facebook.net","https://line.me","https://wired.com","https://myspace.com","https://scribd.com","https://wetransfer.com","https://chase.com","https://amazon-adsystem.com","https://binance.com","https://gvt.com","https://jianshu.com","https://healthline.com","https://linktr.ee","https://espn.com","https://msedge.net","https://cpanel.com","https://ilovepdf.com","https://google.ru","https://xinhuanet.com","https://deepl.com","https://tripadvisor.com","https://pixabay.com","https://techcrunch.com","https://ggpht.com","https://google.fr","https://mysql.com","https://fc.com","https://ca.gov","https://huffingtonpost.com","https://mediafire.com","https://squarespace.com","https://berkeley.edu","https://salesforce.com","https://statista.com","https://daum.net","https://livejournal.com","https://pki.goog","https://zoho.com","https://merdeka.com","https://xnxx.com","https://steampowered.com","https://zillow.com","https://deviantart.com","https://amzn.to","https://latimes.com","https://webmd.com","https://weather.com","https://ft.com","https://loc.gov","https://googletagservices.com","https://addthis.com","https://hupu.com","https://rt.com","https://kumparan.com","https://theverge.com","https://kompas.com","https://fb.com","https://detik.com","https://free.fr","https://shutterstock.com","https://g.page","https://adnxs.com","https://investopedia.com","https://tistory.com","https://amazon.ca","https://upwork.com","https://beian.gov.cn","https://kickstarter.com","https://demdex.net","https://tandfonline.com","https://taboola.com","https://opendns.com","https://stackexchange.com","https://cornell.edu","https://roblox.com","https://akamaized.net","https://cctv.com","https://speedtest.net","https://debian.org","https://sitemaps.org","https://azure.com","https://theatlantic.com","https://google.ca","https://cambridge.org","https://prnewswire.com","https://nbcnews.com","https://patreon.com","https://snapchat.com","https://nflxso.net","https://nationalgeographic.com","https://huffpost.com","https://fda.gov","https://eastmoney.com","https://cisco.com","https://ikea.com","https://stripe.com","https://google.com.br","https://arnebrachhold.de","https://business.site","https://cbsnews.com","https://washington.edu","https://intel.com","https://ifeng.com","https://ietf.org"];
+
+function r(text) {
+var x = document.createElement("BUTTON");
+x.innerHTML = text.split("//")[1];
+x.onclick = function() {window.open(text); };
+x.className = "b";
+results.appendChild(x);
+if (s.value.toLowerCase().indexOf(text.split("//")[1].split(".")[0].toLowerCase()) < 0) {
+    x.remove();
+  }
+}
+
+function timer() {
+loader.style.visibility = "visible";
+results.style.opacity = "0.5";
+setTimeout(loadResults, 1000);
+}
+function l() {
+results.style.opacity = "0.5";
+}
+function loadResults() {
+for (let i = 0; i < library.length ;i++) {
+r(library[i]);
+}
+loader.style.visibility = "hidden";
+results.style.opacity = "1";
+}
+ 
+document.body.onkeyup = function(e){  
+    if(e.keyCode == 13){
+        timer();
+    }
+}
+
+s.onkeyup = function() {l(); };
+
+s.value = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
+timer();
+</script>
+</body>
+</html>
