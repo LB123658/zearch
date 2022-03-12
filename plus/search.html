@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zearch+ results</title>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<style>
+::selection {
+  background: #282828;
+}
+:focus {
+  outline: 0;
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+body {
+  background: #202124;
+  overflow-x: hidden;
+}
+a, p, h1, h2, span, input, div {
+  color: #8ab4f8;
+  background: transparent;
+}
+a, p, span, input, div {
+  color: #8ab4f8;
+  background: transparent;
+  font-size: 16px;
+}
+button {
+  padding: 10px 0px 10px 0px;
+  border: 1.5px solid #8ab4f8;
+  font-size: 16px;
+  transition: background 0.4s;
+}
+button:hover {
+  background: #2b313b;
+  cursor: pointer;
+}
+button:focus {
+  background: transparent;
+}
+.b {
+  height: 40px;
+  width: 95%;
+  background: transparent;
+  border-radius: 5px;
+  color: #8ab4f8;
+  margin-top: 10px;
+}
+#top {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 80px;
+  width: 100%;
+  background: #202124;
+  border-bottom: 1.5px solid #383838;
+  text-align: center;
+  z-index: 1;
+}
+#top input {
+  height: 40px;
+  margin-top: 20px;
+  border: none;
+  background: #333438;
+  border-radius: 20px;
+  width: 90%;
+  padding: 0px 10px 0px 10px;
+  font-size: 
+}
+#results {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  width: 60%;
+  text-align: center;
+}
+#info {
+  position: fixed;
+  top: 100px;
+  left: 60%;
+  width: 38%;
+  font-size: 16px;
+  border-radius: 5px;
+  color: #8ab4f8;
+  margin-top: 10px;
+  background: #333438;
+  visibility: hidden;
+}
+#info * {
+  padding: 5px 20px 5px 20px;
+  width: 90%;
+}
+#info i {
+margin-left: -20px;
+}
+#loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px -50px;
+  border-radius: 50%;
+  border: 10px solid #8ab4f8;
+  border-top: 10px solid transparent;
+  z-index; 2;
+  visibility: hidden;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<div id="top">  
+<form action="search">
+  <input type="text" autocomplete="off" placeholder="Search" id="s" name="q"/>
+</form>
+</div>
+
+<div id="results"></div>
+
+
+<div id="info">
+<h2>Zearch<i style="font-size:15px;">plus</i></h2>
+<p>Warning: This version does not filter results to make sure they are safe.<br><br>This version of Zearch is currently being updated to have better results and online privacy.<br><br><a href="https://lb123658.github.io/zearch/plus"><button class="b">Homepage</button></a></p>
+</div>
+
+<div id="loader"></div>
+
+<script src="https://lb123658.github.io/zearch/plus/library.js"></script>
+<script>
+var info = document.getElementById("info");
+var results = document.getElementById("results");
+var loader = document.getElementById("loader");
+
+var s = document.getElementById("s");
+
+function r(text) {
+var x = document.createElement("BUTTON");
+x.innerHTML = text.split("//")[1];
+x.onclick = function() {window.open(text); };
+x.className = "b";
+results.appendChild(x);
+  if (s.value.toLowerCase().indexOf(text.split("//")[1].split(".")[0].toLowerCase()) < 0) {
+    x.remove();
+  } else if (text.split("//")[1].split(".")[0].length < 1) {
+    x.remove();
+  }
+}
+
+function timer() {
+loader.style.visibility = "visible";
+results.style.opacity = "0.5";
+setTimeout(loadResults, 1000);
+}
+function l() {
+results.style.opacity = "0.5";
+}
+function loadResults() {
+for (let i = 0; i < library.length ;i++) {
+r(library[i]);
+}
+loader.style.visibility = "hidden";
+results.style.opacity = "1";
+info.style.visibility = "visible";
+}
+ 
+document.body.onkeyup = function(e){  
+    if(e.keyCode == 13){
+        timer();
+    }
+}
+
+s.onkeyup = function() {l(); };
+
+s.value = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
+timer();
+</script>
+</body>
+</html>
