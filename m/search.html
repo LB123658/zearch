@@ -124,7 +124,9 @@ x.innerHTML = text.split("//")[1];
 x.onclick = function() {window.open(text); };
 x.className = "b";
 results.appendChild(x);
-if (s.value.toLowerCase().indexOf(text.split("//")[1].split(".")[0].toLowerCase()) < 0) {
+  if (s.value.toLowerCase().indexOf(text.split("//")[1].split(".")[0].toLowerCase()) < 0) {
+    x.remove();
+  } else if (text.split("//")[1].split(".")[0].length < 1) {
     x.remove();
   }
 }
