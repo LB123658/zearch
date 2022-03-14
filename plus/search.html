@@ -193,12 +193,13 @@ results.appendChild(x);
 function timer() {
 loader.style.visibility = "visible";
 results.style.opacity = "0.5";
-setTimeout(loadResults, 1000);
+setTimeout(loadResults, 0);
 }
 function l() {
 results.style.opacity = "0.5";
 }
 function loadResults() {
+loader.style.visibility = "visible";
 for (let i = 0; i < library.length ;i++) {
 r(library[i]);
 }
