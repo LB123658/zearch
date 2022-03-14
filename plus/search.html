@@ -63,14 +63,15 @@ button:focus {
   z-index: 1;
 }
 #top input {
+  position: absolute;
+  top: 20px;
+  left: 80px;
   height: 40px;
-  margin-top: 20px;
   border: none;
   background: #333438;
   border-radius: 20px;
-  width: 90%;
+  width: 80%;
   padding: 0px 10px 0px 10px;
-  font-size: 
 }
 #results {
   position: absolute;
@@ -108,7 +109,7 @@ margin-left: -20px;
   border-radius: 50%;
   border: 10px solid #8ab4f8;
   border-top: 10px solid transparent;
-  z-index; 2;
+  z-index: 3;
   visibility: hidden;
   animation: spin 2s linear infinite;
 }
@@ -116,14 +117,45 @@ margin-left: -20px;
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+#cover {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: #202124;
+  z-index: 2;
+  visibility: hidden;
+}
+#share {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: #202124;
+  border-radius: 50%;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.7;
+  transform: opacity 0.4s;
+}
+#share:hover {
+  opacity: 1;
+}
 </style>
 </head>
 <body>
 <div id="top">  
+<img src="https://lb123658.github.io/zearch/plus/favicon.png" style="width:40px; height: 40px; float: left; margin: 20px; cursor: pointer;" title="Home page" onclick="home();"/>
 <form action="search">
   <input type="text" autocomplete="off" placeholder="Search" id="s" name="q"/>
 </form>
 </div>
+
+<button id="share" title="Share page" onclick="clip()"><span class="material-icons" style="transform:scale(0.9); margin:-8px -4px;">ios_share</span></button>
 
 <div id="results"></div>
 
@@ -133,6 +165,7 @@ margin-left: -20px;
 <p>Warning: This version does not filter results to make sure they are safe.<br><br>This version of Zearch is currently being updated to have better results and online privacy.<br><br><a href="https://lb123658.github.io/zearch/plus"><button class="b">Homepage</button></a></p>
 </div>
 
+<div id="cover"></div>
 <div id="loader"></div>
 
 <script src="https://lb123658.github.io/zearch/plus/library.js"></script>
@@ -140,6 +173,7 @@ margin-left: -20px;
 var info = document.getElementById("info");
 var results = document.getElementById("results");
 var loader = document.getElementById("loader");
+var cover = document.getElementById("cover");
 
 var s = document.getElementById("s");
 
@@ -183,6 +217,23 @@ s.onkeyup = function() {l(); };
 
 s.value = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
 timer();
+
+// homapage animation and search bar width
+document.body.onload = function() {w(); };
+document.body.onresize = function() {w(); };
+
+function w() {
+s.style.width = window.innerWidth - 120 + "px";
+}
+function home() {
+cover.style.visibility = "visible";
+loader.style.visibility = "visible";
+setTimeout(function(){location.replace("https://lb123658.github.io/zearch/plus");}, 500);
+}
+
+function clip() {
+window.open("mailto:?body=" + location.href);
+}
 </script>
 </body>
 </html>
