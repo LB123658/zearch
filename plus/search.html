@@ -44,12 +44,27 @@ button:focus {
   background: transparent;
 }
 .b {
-  height: 40px;
+  min-height: 20px;
   width: 95%;
   background: transparent;
   border-radius: 5px;
   color: #8ab4f8;
   margin-top: 10px;
+  padding: 10px;
+  border: 1.5px solid #8ab4f8;
+  font-size: 16px;
+  transition: background 0.4s;
+}
+.b:hover {
+  background: #2b313b;
+  cursor: pointer;
+}
+.b:focus {
+  background: transparent;
+}
+.b span {
+  color: grey;
+  font-size: 13px;
 }
 #top {
   position: fixed;
@@ -76,15 +91,17 @@ button:focus {
 #results {
   position: absolute;
   top: 100px;
-  left: 0px;
-  width: 60%;
-  text-align: center;
+  left: 20px;
+  width: 55%;
+}
+#results div {
+width: 100%;
 }
 #info {
   position: fixed;
   top: 100px;
-  left: 60%;
-  width: 38%;
+  right: 20px;
+  width: 35%;
   font-size: 16px;
   border-radius: 5px;
   color: #8ab4f8;
@@ -98,6 +115,14 @@ button:focus {
 }
 #info i {
 margin-left: -20px;
+}
+#info button {
+height: 40px;
+margin: 0px -20px;
+width: 100%;
+}
+#info button:hover {
+transform: scale(1.02);
 }
 #loader {
   position: fixed;
@@ -178,8 +203,8 @@ var cover = document.getElementById("cover");
 var s = document.getElementById("s");
 
 function r(text) {
-var x = document.createElement("BUTTON");
-x.innerHTML = text.split("//")[1];
+var x = document.createElement("DIV");
+x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1];
 x.onclick = function() {window.open(text); };
 x.className = "b";
 results.appendChild(x);
@@ -225,7 +250,9 @@ document.body.onresize = function() {w(); };
 
 function w() {
 s.style.width = window.innerWidth - 120 + "px";
+results.style.width = window.innerWidth - ((window.innerWidth * 0.35) + 80) + "px";
 }
+
 function home() {
 cover.style.visibility = "visible";
 loader.style.visibility = "visible";
