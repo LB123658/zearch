@@ -53,11 +53,12 @@ button:focus {
   padding: 10px;
   border: 1.5px solid #8ab4f8;
   font-size: 16px;
-  transition: background 0.4s;
+  transition: background 0.4s, transform 0.4s;
 }
 .b:hover {
   background: #2b313b;
   cursor: pointer;
+  transform: scale(1.005);
 }
 .b:focus {
   background: transparent;
@@ -170,11 +171,18 @@ transform: scale(1.02);
 #share:hover {
   opacity: 1;
 }
+#homebutton {
+width:40px; 
+height: 40px; 
+float: left; 
+margin: 20px; 
+cursor: pointer;
+}
 </style>
 </head>
 <body>
 <div id="top">  
-<img src="https://lb123658.github.io/zearch/plus/favicon.png" style="width:40px; height: 40px; float: left; margin: 20px; cursor: pointer;" title="Home page" onclick="home();"/>
+<img src="https://lb123658.github.io/zearch/plus/favicon.png" title="Home page" onclick="home();" id="homebutton"/>
 <form action="search">
   <input type="text" autocomplete="off" placeholder="Search" id="s" name="q"/>
 </form>
@@ -201,6 +209,14 @@ var loader = document.getElementById("loader");
 var cover = document.getElementById("cover");
 
 var s = document.getElementById("s");
+
+function wikipedia() {
+var y = document.createElement("DIV");
+y.onclick = function() {window.open("https://wikipedia.org/wiki/Special:Search?search=" + s.value); };
+y.className = "b";
+y.innerHTML = "<span>▸ https://wikipedia.org/wiki/Special:Search?search=" + s.value + "</span><br>" + s.value + " - Wikipedia<br><span>This result is a suggestion based on your search.</span>";
+results.appendChild(y);
+}
 
 function r(text) {
 var x = document.createElement("DIV");
@@ -259,6 +275,7 @@ results.style.opacity = "0.5";
 }
 function loadResults() {
 loader.style.visibility = "visible";
+wikipedia();
 for (let i = 0; i < library.length ;i++) {
 r(library[i]);
 }
@@ -296,6 +313,8 @@ setTimeout(function(){location.replace("https://lb123658.github.io/zearch/plus")
 function clip() {
 window.open("mailto:?body=" + location.href);
 }
+
+document.getElementsByTagName("title")[0].innerHTML = s.value + " - Zearch+";
 </script>
 </body>
 </html>
