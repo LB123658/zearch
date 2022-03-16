@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>loading page</h2>
+
+<script>
+localStorage.setItem("zearch_index", localStorage.getItem("zearch_index") + "\"" + location.search.split("=")[1].replace(/\+/gi, " ") + "\",");
+</script>
+
+</body>
+</html>
