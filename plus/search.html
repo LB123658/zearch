@@ -202,6 +202,8 @@ cursor: pointer;
 <div id="loader"></div>
 
 <script src="https://lb123658.github.io/zearch/plus/library.js"></script>
+<script src="https://lb123658.github.io/zearch/plus/testLibrary.js"></script>
+
 <script>
 var info = document.getElementById("info");
 var results = document.getElementById("results");
@@ -265,6 +267,25 @@ results.appendChild(x);
   }
 }
 
+// test section for better results
+function rTest(word) {
+var y = document.createElement("DIV");
+y.innerHTML = "<span>▸ " + word.split("  ")[1] + "</span><br>" + decodeURIComponent(word.split("  ")[0]) + "<br><span>This is a smart suggestion.</span>";
+y.onclick = function() {window.open(word.split("  ")[1]); };
+y.className = "b";
+results.appendChild(y);
+  if (word.split("  ")[0].toLowerCase().indexOf(s.value.toLowerCase()) < 0) {
+    y.remove();
+  }
+}
+
+function tester() {
+for (let i = 0; i < testLibrary.length ;i++) {
+rTest(testLibrary[i]);
+}
+}
+// back to regular part
+
 function timer() {
 loader.style.visibility = "visible";
 results.style.opacity = "0.5";
@@ -276,6 +297,7 @@ results.style.opacity = "0.5";
 function loadResults() {
 loader.style.visibility = "visible";
 wikipedia();
+tester();
 for (let i = 0; i < library.length ;i++) {
 r(library[i]);
 }
@@ -286,6 +308,7 @@ info.style.visibility = "visible";
  
 document.body.onkeyup = function(e){  
     if(e.keyCode == 13){
+        results.innerHTML = "";
         timer();
     }
 }
@@ -295,7 +318,7 @@ s.onkeyup = function() {l(); };
 s.value = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
 timer();
 
-// homapage animation and search bar width
+// homepage animation and search bar width
 document.body.onload = function() {w(); };
 document.body.onresize = function() {w(); };
 
