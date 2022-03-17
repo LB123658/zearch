@@ -338,6 +338,10 @@ window.open("mailto:?body=" + location.href);
 }
 
 document.getElementsByTagName("title")[0].innerHTML = s.value + " - Zearch+";
+
+if (s.value.length == 0) {
+location.replace("https://lb123658.github.io/zearch/plus");
+}
 </script>
 </body>
 </html>
