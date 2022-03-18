@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +6,6 @@
 <link rel="icon" href="favicon.png" type="image/png"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3XVYDWPJYP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3XVYDWPJYP');
-</script>
-
 <style>
 body {
 background: #e8e8e8;
@@ -107,6 +95,32 @@ p {
 .pbutton:focus {
   background: transparent;
 }
+#d {
+position: fixed;
+bottom: 30px;
+left: 50%;
+width: 200px;
+height: 40px;
+margin-left: -100px;
+color: white;
+border-radius: 0px;
+background-image: linear-gradient(#21c337, #41e858);
+font-size: 20px;
+border: none;
+cursor: pointer;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#d:hover {
+background-image: linear-gradient(#41e858, #21c337);
+}
+#d:focus {
+transform: scale(1.05);
+border: 1.5px solid red;
+}
+#d span {
+float: right;
+margin-right: 15px;
+}
 </style>
 </head>
 <body>
@@ -131,5 +145,9 @@ p {
 <br>
 <p>Upgrade to Zearch plus to have much better, although unckecked, search results out of over 20k listed websites. With complete privacy, this version doesn't even keep track of your search history.</p>
 </div>
+
+<a href="https://github.com/LB123658/zearch/archive/refs/heads/main.zip">
+<button id="d" title="Download source code as zip file">Download <span class="material-icons">save_alt</span></button>
+</a>
 </body>
 </html>
