@@ -96,6 +96,7 @@ width: 100%;
   margin-top: 10px;
   background: #333438;
   visibility: hidden;
+  overflow: auto;
 }
 #info * {
   padding: 5px 20px 5px 20px;
@@ -282,7 +283,7 @@ function findInfo() {
 }
 
 function quick(information) {
-info.innerHTML = "<h2>Quick information</h2><p>NEW</p><p>" + information + "</p>";
+info.innerHTML = "<h2>Quick information</h2><p>NEW</p><p>" + decodeURIComponent(information) + "</p>";
 }
 
 //load all results with loader
