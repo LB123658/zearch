@@ -30,19 +30,6 @@ a, p, span, input, div {
   background: transparent;
   font-size: 16px;
 }
-button {
-  padding: 10px 0px 10px 0px;
-  border: 1.5px solid #8ab4f8;
-  font-size: 16px;
-  transition: background 0.4s;
-}
-button:hover {
-  background: #2b313b;
-  cursor: pointer;
-}
-button:focus {
-  background: transparent;
-}
 .b {
   min-height: 20px;
   width: 95%;
@@ -188,7 +175,7 @@ cursor: pointer;
 </form>
 </div>
 
-<button id="share" title="Share page" onclick="clip()"><span class="material-icons" style="transform:scale(0.9); margin:-8px -4px;">ios_share</span></button>
+<button id="share" title="Share page" onclick="clip()"><span class="material-icons" style="transform:scale(0.9); margin: 0px -4px;">ios_share</span></button>
 
 <div id="results"></div>
 
@@ -203,15 +190,15 @@ cursor: pointer;
 
 <script src="https://lb123658.github.io/zearch/plus/library.js"></script>
 <script src="https://lb123658.github.io/zearch/plus/testLibrary.js"></script>
-
+<script src="https://lb123658.github.io/zearch/plus/quickInfo.js"></script>
 <script>
 var info = document.getElementById("info");
 var results = document.getElementById("results");
 var loader = document.getElementById("loader");
 var cover = document.getElementById("cover");
-
 var s = document.getElementById("s");
 
+//result loading functions
 function wikipedia() {
 var y = document.createElement("DIV");
 y.onclick = function() {window.open("https://wikipedia.org/wiki/Special:Search?search=" + s.value); };
@@ -267,7 +254,7 @@ results.appendChild(x);
   }
 }
 
-// test section for better results
+//section for smart results
 function rTest(word) {
 var y = document.createElement("DIV");
 y.innerHTML = "<span>▸ " + word.split("  ")[1] + "</span><br>" + decodeURIComponent(word.split("  ")[0]) + "<br><span>This is a smart suggestion.</span>";
@@ -284,8 +271,21 @@ for (let i = 0; i < testLibrary.length ;i++) {
 rTest(testLibrary[i]);
 }
 }
-// back to regular part
 
+//load quick information panel
+function findInfo() {
+  for (let i = 0; i < quickInfo.length ;i++) {
+    if (quickInfo[i].slice(0, 20).toLowerCase().indexOf(s.value.toLowerCase()) > -1) {
+      quick(quickInfo[i]);
+    } 
+  }
+}
+
+function quick(information) {
+info.innerHTML = "<h2>Quick information</h2><p>NEW</p><p>" + information + "</p>";
+}
+
+//load all results with loader
 function timer() {
 loader.style.visibility = "visible";
 results.style.opacity = "0.5";
@@ -301,6 +301,7 @@ tester();
 for (let i = 0; i < library.length ;i++) {
 r(library[i]);
 }
+findInfo();
 loader.style.visibility = "hidden";
 results.style.opacity = "1";
 info.style.visibility = "visible";
