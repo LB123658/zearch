@@ -317,7 +317,7 @@ document.body.onkeyup = function(e){
 
 s.onkeyup = function() {l(); };
 
-s.value = location.search.split("=")[1].split("&")[0].replace(/\+/gi, " ");
+s.value = decodeURIComponent(location.search.split("=")[1].split("&")[0].replace(/\+/gi, " "));
 timer();
 
 // homepage animation and search bar width
