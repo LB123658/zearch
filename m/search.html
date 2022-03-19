@@ -44,6 +44,11 @@ button:hover {
 button:focus {
   background: transparent;
 }
+button span {
+  color: grey;
+  font-size: 35px;
+  margin: 0px;
+}
 .b {
   width: 100%;
   width: 95%;
@@ -120,7 +125,41 @@ var s = document.getElementById("s");
   
 function r(text) {
 var x = document.createElement("BUTTON");
-x.innerHTML = text.split("//")[1];
+  if (text.split("//")[1].split(".")[1] == "ru") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because the website is from Russia.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "gov") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is a government website.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "org") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is an organization.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "edu") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is a school's website.</span>";
+  } else if (text.split("//")[1].split(".")[0] == s.value.toLowerCase()) {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This is a more relevant result.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "cf") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "ml") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "ga") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "work") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "gq") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "fit") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "tk") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "zip") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "review") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "country") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else if (text.split("//")[1].split(".")[1] == "link") {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1] + "<br><span>This result is tagged because it may be unsafe.</span>";
+  } else {
+    x.innerHTML = "<span>▸ https://" + text.split("//")[1] + "</span><br>" + text.split("//")[1];
+  }
 x.onclick = function() {window.open(text); };
 x.className = "b";
 results.appendChild(x);
@@ -130,6 +169,7 @@ results.appendChild(x);
     x.remove();
   }
 }
+
 
 function timer() {
 loader.style.visibility = "visible";
