@@ -276,7 +276,7 @@ rTest(testLibrary[i]);
 //load quick information panel
 function findInfo() {
   for (let i = 0; i < quickInfo.length ;i++) {
-    if (quickInfo[i].slice(0, 20).toLowerCase().indexOf(s.value.toLowerCase()) > -1) {
+    if (quickInfo[i].slice(0, 65).toLowerCase().indexOf(s.value.toLowerCase()) > -1) {
       quick(quickInfo[i]);
     } 
   }
