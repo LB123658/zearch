@@ -1,0 +1,15 @@
+tyle>
+  body {
+    background: #202124;
+    color: white;
+    overflow-x: hidden;
+  }
+  * {
+    background: transparent;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+  }
+  ::selection {
+    background: grey;
+  }
