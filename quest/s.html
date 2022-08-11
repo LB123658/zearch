@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quest - results</title>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+<style>
+body {
+    background: white;
+    color: black;
+    overflow-x: hidden;
+  }
+  * {
+    background: white;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+  }
+  ::selection {
+    background: lightgrey;
+  }
+  #input-div {
+    position: absolute;
+    top: 10px;
+    left: 180px;
+    width: 440px;
+  }
+  #input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 400px;
+    height: 40px;
+    font-size: 20px;
+    border: 2px solid grey;
+    border-right: 2px solid black;
+  }
+  #input:focus {
+    border: 2px solid black;
+  }
+  #submit {
+    position: absolute;
+    top: 0px;
+    left: 408px;
+    height: 46px;
+    width: 45px;
+    border: 2px solid black;
+    border-left: none;
+    cursor: pointer;
+  }
+  #submit:hover span {
+    color: red;
+  }
+ #logo {
+   position: absolute;
+   top: 10px;
+   left: 10px;
+   font-size: 40px;
+   text-decoration: none;
+ }
+ #logo span {
+   font-size: 15px;
+   color: red;
+ }
+ .off {
+   pointer-events: none;
+   opacity: 0.6;
+ }
+ #autocomplete {
+   position: absolute;
+   top: 46px;
+   left: 0px;
+   width: 453px;
+   background: black;
+   visibility: hidden;
+   max-height: 280px;
+   overflow: auto;
+ }
+ #autocomplete button {
+   width: 449px;
+   text-align: left;
+   font-size: 20px;
+   color: white;
+   background: transparent;
+   border: 2px solid black;
+   margin: 2px 2px;
+ }
+ #autocomplete button:hover {
+   border: 2px solid white;
+ }
+ #top {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   width: 100%;
+   height: 66px;
+   background: white;
+   z-index: 10;
+   border-bottom: 2px solid red;
+ }
+ #results {
+   position: absolute;
+   top: 66px;
+   left: 10px;
+   width: 623px;
+   z-index: 0;
+ }
+ #results button {
+   margin-top: 10px;
+   background: transparent;
+   border: 2px solid black;
+   text-align: left;
+   color: black;
+   width: 100%;
+   font-size: 20px;
+ }
+ #results button img {
+   float: left;
+   height: 15px;
+   width: 15px;
+   margin: 5px 5px 0px 0px;
+ }
+ #results button span {
+   font-size: 15px;
+   color: red;
+ }
+ #results button:hover span {
+   text-decoration: underline;
+ }
+#info {
+   position: absolute;
+   top: 66px;
+   left: 643px;
+   z-index: 0;
+   min-width: 300px;
+ }
+ #info button {
+   margin-top: 10px;
+   background: transparent;
+   border: 2px solid black;
+   text-align: left;
+   color: black;
+   width: 100%;
+   font-size: 20px;
+   word-wrap: break-word;
+ }
+ #info button img {
+   float: left;
+   height: 15px;
+   width: 15px;
+   margin: 5px 5px 0px 0px;
+ }
+ #info button span {
+   font-size: 15px;
+   color: #1a0dab;
+ }
+ #info button:hover span {
+   text-decoration: underline;
+ }
+ .share {
+   margin: 10px 5px;
+   width: 46px;
+   height: 46px;
+   border: 2px solid black;
+   background: transparent;
+   float: right;
+   cursor: pointer;
+ }
+ .share:hover span {
+   color: red;
+ }
+@media screen and (max-width: 758px) {
+  .share {
+    visibility: hidden;
+  }
+}
+</style>
+</head>
+<body>
+<div id="top">
+<a id="logo" href="index.html">Quest<span>BETA</span></a>
+<!-- input section -->
+<div id="input-div">
+<form action="s.html" id="form">
+<input type="text" placeholder="Search" autocomplete="off" name="q" id="input" onkeyup="suggest(); smartSuggest()">
+</form>
+<button type="submit" id="submit" form="form"><span class="material-icons">search</span></button>
+<!-- autocomplete -->
+<div id="autocomplete"></div>
+</div>
+<!-- share buttons -->
+<a href="#" id="sms" target="_blank">
+  <button class="share" style="margin-right:10px">
+  <span class="material-icons">sms</span>
+  </button>
+</a>
+<a href="#" id="email" target="_blank">
+  <button class="share" style="margin-right:10px">
+  <span class="material-icons">mail</span>
+  </button>
+</a>
+</div>
+
+<div id="results"></div>
+<div id="info"></div>
+<script src="https://lb123658.github.io/zearch/plus/library.js"></script>
+<script>
+var input = document.getElementById("input");
+var auto = document.getElementById("autocomplete");
+var storedLanguage = localStorage.getItem("quest_language");
+var results = document.getElementById("results");
+var info = document.getElementById("info");
+var sms = document.getElementById("sms");
+var email = document.getElementById("email");
+
+input.value = decodeURIComponent(location.search.split("=")[1].replace(/\+/gi, " "));
+var s = input.value.toLowerCase();
+
+// load results
+function r(z) {
+var b = document.createElement("a");
+b.href = z;
+b.innerHTML = "<button><img src='https://external-content.duckduckgo.com/ip3/" + z.split("//")[1] + ".ico' loading='lazy'></img><span>▸" + z + "</span><br>" + z.split("//")[1] + "</button>";
+results.appendChild(b);
+  if (input.value.toLowerCase().indexOf(z.toLowerCase().split("//")[1].split(".")[0]) < 0) {
+    b.remove();
+  } else if (z.split("//")[1].split(".")[0].length < 1) {
+    b.remove();
+  }
+}
+
+
+function loadResults() {
+  for (let i = 0; i < library.length ;i++) {
+    r(library[i]);
+  }
+}
+setTimeout(loadResults, 10);
+
+
+function suggest() {
+if (input.value.length > 0) {
+auto.innerHTML = "<button type='submit' form='form'>" + input.value + "</button>";
+auto.style.visibility = "visible";
+} else {
+auto.style.visibility = "hidden";
+}
+}
+
+//use past searches for autocomplete
+function loadSuggestion(a) {
+var y = document.createElement("button");
+y.innerHTML = a;
+y.onclick = function() {input.value = a; location.replace("s.html?q=" + a.replace(/ /gi, "+")); };
+auto.appendChild(y);
+  if (a.toLowerCase().indexOf(input.value.toLowerCase()) < 0) {
+    y.remove();
+  }
+}
+
+//autocomplete
+function smartSuggest() {
+  for (let i = 0; i < library.length ;i++) {
+    loadSuggestion(library[i].split("https://")[1].split(".")[0]);
+  }
+}
+
+//set language
+var storedLanguage = localStorage.getItem("quest_language");
+var language;
+if (storedLanguage == "spanish") {
+  language = {
+    place: "Buscar",
+    wiki: "es",
+    num: "Resultados"
+  }
+} else if (storedLanguage == "guarani") {
+  language = {
+    place: "Heka",
+    wiki: "gn",
+    num: ""
+  }
+} else if (storedLanguage == "quechua") {
+  language = {
+    place: "Maskay",
+    wiki: "qu",
+    num: "Pukyukuna"
+  }
+} else if (storedLanguage == "aymara") {
+  language = {
+    place: "Thajaña",
+    wikipedia: "ay",
+    num: ""
+  }
+} else if (storedLanguage == "nahuatl") {
+  language = {
+    place: "Tlatemoliztli",
+    wiki: "nah",
+    num: ""
+  }
+} else if (storedLanguage == "qeqchi") {
+  language = {
+    place: "Sik'ok",
+    wiki: "en",
+    num: ""
+  }
+} else if (storedLanguage == "greenlandic") {
+  language = {
+    place: "Ujarlerit",
+    wiki: "kl",
+    num: ""
+  }
+} else if (storedLanguage == "inuktitut") {
+  language = {
+    place: "ᕿᓂᕐᓂᖅ",
+    wiki: "iu",
+    num: "ᖃᓄᐃᓕᖓᓂᖏᑦ"
+  }
+} else if (storedLanguage == "maya") {
+  language = {
+    place: "Kaxan",
+    wiki: "en",
+    num: "Ya'ala'al"
+  }
+} else if (storedLanguage == "kiche") {
+  language = {
+    place: "Chutzukuxik",
+    wiki: "en",
+    num: ""
+  }
+} else if (storedLanguage == "navajo") {
+  language = {
+    place: "Bíkanítá",
+    wiki: "nv",
+    num: ""
+  }
+} else if (storedLanguage == "cree") {
+  language = {
+    place: "ᓇᑐᓂᑫᐤ/Natonikêw",
+    wiki: "cr",
+    num: ""
+  }
+} else if (storedLanguage == "ojibwe") {
+  language = {
+    place: "Nandawaabam",
+    wiki: "en",
+    num: ""
+  }
+} else {
+  language = {
+    place: "Search",
+    wiki: "en",
+    num: "Results"
+  }
+} 
+input.placeholder = language.place;
+
+//load info section, search data and suggested links
+document.body.onload = function(){sizeInfo();};
+document.body.onresize = function(){sizeInfo();};
+function sizeInfo() {
+info.style.width = window.innerWidth - 653 + "px";
+}
+
+setTimeout(function() {
+if (input.value.indexOf(" ") < 0) {
+var term = input.value.slice(0,1).toUpperCase() + input.value.slice(1,input.value.length).toLowerCase();
+info.innerHTML = "<button>>> " + results.children.length + "&nbsp;" + language.num + "</button><a href='https://" + language.wiki + ".wikipedia.org/w/index.php?search=" + term + "' target='_blank'><button><img src='https://external-content.duckduckgo.com/ip3/wikipedia.org.ico' loading='lazy'></img><span>▸https://" + language.wiki + ".wikipedia.org/w/index.php?search=" + term + "</span><br>" + term + " - Wikipedia</button></a>  <a href='https://" + input.value.toLowerCase() + ".com' target='_blank'><button><img src='https://external-content.duckduckgo.com/ip3/" + input.value.toLowerCase() + ".com.ico' loading='lazy'></img><span>▸https://" + input.value.toLowerCase() + ".com</span><br>" + input.value.toLowerCase() + ".com</button></a>";
+}
+},100);
+
+//load share links
+sms.href = "sms:&body=" + window.location;
+email.href = "mailto:?body=" + window.location;
+</script>
+</body>
+</html>
