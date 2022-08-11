@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quest</title>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: #202124;
+    color: white;
+    overflow-x: hidden;
+  }
+  * {
+    background: transparent;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+  }
+  ::selection {
+    background: grey;
+  }
+  #content {
+    visibility: hidden;
+  }
+  #input-div {
+    position: absolute;
+    top: 80px;
+    left: 0%;
+    width: 100%;
+  }
+  #input {
+    position: absolute;
+    top: 0px;
+    left: 1%;
+    width: 98%;
+    height: 80px;
+    font-size: 50px;
+    border: 2px solid grey;
+    border-radius: 0px;
+  }
+  #input:focus {
+    border: 2px solid white;
+  }
+ #logo {
+   position: absolute;
+   top: -50px;
+   left: 70px;
+   text-align: center;
+   font-size: 50px;
+   user-select: none;
+   -webkit-user-select: none;
+   color: orange;
+ }
+ #settings:hover #languages {
+   left: 0px;
+ }
+ #open-menu {
+   position: absolute;
+   top: 10px;
+   left: 10px;
+   height: 50px;
+   width: 50px;
+   border: 2px solid white;
+   cursor: pointer;
+ }
+ #languages {
+   z-index: 2;
+   background: black;
+   position: fixed;
+   top: 0px;
+   left: -100%;
+   width: 100%;
+   height: 100%;
+   color: white;
+   transition: left 0.3s;
+   overflow: auto;
+ }
+ #languages button {
+   width: 98%;
+   text-align: left;
+   font-size: 20px;
+   color: white;
+   background: transparent;
+   border: 2px solid black;
+   margin: 2px 1%;
+ }
+ #languages button:hover {
+   border: 2px solid white;
+ }
+ .off {
+   pointer-events: none;
+   opacity: 0.6;
+ }
+ #autocomplete {
+   position: absolute;
+   top: 85px;
+   left: 0px;
+   width: 100%;
+   background: black;
+   visibility: hidden;
+   max-height: 280px;
+   overflow: auto;
+ }
+ #autocomplete button {
+   width: 99%;
+   text-align: left;
+   font-size: 20px;
+   color: white;
+   background: transparent;
+   border: 2px solid black;
+   margin: 2px 1%;
+ }
+ #autocomplete button:hover {
+   border: 2px solid white;
+ }
+</style>
+</head>
+<body>
+<noscript>Turn on javascript to view this page.</noscript>
+<div id="content">
+<p id="logo">Quest</p>
+<!-- input section -->
+<div id="input-div">
+<form action="s.html" id="form">
+<input type="text" placeholder="Search" autocomplete="off" name="q" id="input" onkeyup="suggest(); smartSuggest()">
+</form>
+<!-- autocomplete -->
+<div id="autocomplete"></div>
+</div>
+<!-- settings menu -->
+<div id="settings">
+<button id="open-menu"><span class="material-icons">translate</span></button>
+<div id="languages">
+<button style="pointer-events:none;" id="settingsTitle">LANGUAGES</button>
+<br><br>
+<button class="l" onclick="set('english')">English</button>
+<button class="l" onclick="set('spanish')">Español</button>
+<button class="l" onclick="set('guarani')">Avañeʼẽ</button>
+<button class="l" onclick="set('quechua')">Runa Simi</button>
+<button class="l" onclick="set('aymara')">Aymar aru</button>
+<button class="l" onclick="set('nahuatl')">Nāhuatlahtōlli</button>
+<button class="l" onclick="set('qeqchi')">Q'eqchi'</button>
+<button class="l" onclick="set('greenlandic')">Kalaallisut</button>
+<button class="l" onclick="set('inuktitut')">ᐃᓄᒃᑎᑐᑦ</button>
+<button class="l" onclick="set('maya')">Màayaʼ tʼàan</button>
+<button class="l" onclick="set('kiche')">K'iche'</button>
+<button class="l" onclick="set('navajo')">Diné bizaad</button>
+<button class="l" onclick="set('cree')">ᓀᐦᐃᔭᐍᐏᐣ/Nēhiyawēwin</button>
+<button class="l" onclick="set('ojibwe')">Anishinaabemowin/ᐊᓂᐦᔑᓈᐯᒧᐎᓐ</button>
+</div>
+</div>
+
+</div>
+<script src="https://lb123658.github.io/zearch/plus/library.js"></script>
+<script>
+var content = document.getElementById("content");
+var input = document.getElementById("input");
+var logo = document.getElementById("logo");
+var auto = document.getElementById("autocomplete");
+var storedLanguage = localStorage.getItem("quest_language");
+var settingsTitle = document.getElementById("settingsTitle");
+var l = document.getElementsByClassName("l");
+var settings = document.getElementById("languages");
+var searchLog = localStorage.getItem("search_log");
+var searchForm = document.getElementById("form");
+
+function show(element) {
+element.style.visibility = "visible";
+}
+function hide(element) {
+element.style.visibility = "hidden";
+}
+
+show(content);
+input.focus();
+
+function suggest() {
+if (input.value.length > 0) {
+auto.innerHTML = "<button type='submit' form='form'>" + input.value + "</button>";
+auto.style.visibility = "visible";
+} else {
+auto.style.visibility = "hidden";
+}
+}
+
+var language;
+if (storedLanguage == "spanish") {
+  language = {
+    place: "Buscar",
+    langTitle: "IDIOMAS",
+    buttonFocus: 1,
+    notification: "Por favor póngase en contacto con nosotros por fotsofficial671@gmail.com si encuentra errores de gramática en este sitio web. Estamos tratando de hacer que este sitio está disponible en muchas idiomas y queremos mejorarlo.",
+    notificationClickWarning: "Haz clic doble para cerrar este mensaje"
+  }
+} else if (storedLanguage == "guarani") {
+  language = {
+    place: "Heka",
+    langTitle: "ÑE,Ẽ",
+    buttonFocus: 2
+  }
+} else if (storedLanguage == "quechua") {
+  language = {
+    place: "Mask'ay",
+    langTitle: "SIMIKUNA",
+    buttonFocus: 3
+  }
+} else if (storedLanguage == "aymara") {
+  language = {
+    place: "Thajaña",
+    langTitle: "ARUNAKA",
+    buttonFocus: 4
+  }
+} else if (storedLanguage == "nahuatl") {
+  language = {
+    place: "Tlatemoliztli",
+    langTitle: "TLATOL",
+    buttonFocus: 5
+  }
+} else if (storedLanguage == "qeqchi") {
+  language = {
+    place: "Sik'ok",
+    langTitle: "AATINOB'AAL",
+    buttonFocus: 6
+  }
+} else if (storedLanguage == "greenlandic") {
+  language = {
+    place: "Ujarlerit",
+    langTitle: "OQAATSIT",
+    buttonFocus: 7
+  }
+} else if (storedLanguage == "inuktitut") {
+  language = {
+    place: "ᕿᓂᕐᓂᖅ",
+    langTitle: "ᐅᖃᐅᓰᑦ",
+    buttonFocus: 8
+  }
+} else if (storedLanguage == "maya") {
+  language = {
+    place: "Kaxan",
+    langTitle: "T'AANO'OB",
+    buttonFocus: 9
+  }
+} else if (storedLanguage == "kiche") {
+  language = {
+    place: "Chutzukuxik",
+    langTitle: "TZIJOB'AL",
+    buttonFocus: 10
+  }
+} else if (storedLanguage == "navajo") {
+  language = {
+    place: "Bíkanítá",
+    langTitle: "SAAD",
+    buttonFocus: 11
+  }
+} else if (storedLanguage == "cree") {
+  language = {
+    place: "ᓇᑐᓂᑫᐤ/Natonikêw",
+    langTitle: "ᑕᐣᓯ  ᑲ  ᐃᓯᐲᑭᐢᑫᐧᕁ <br> TANSI KA ISIPÎKISKWEHK",
+    buttonFocus: 12
+  }
+} else if (storedLanguage == "ojibwe") {
+  language = {
+    place: "Nandawaabam",
+    langTitle: "INWEWIN",
+    buttonFocus: 13
+  }
+} else {
+  language = {
+    place: "Search",
+    langTitle: "LANGUAGES",
+    buttonFocus: 0,
+    notification: "Contact fotsofficial671@gmail.com if you find grammar mistakes on this site as we are trying to make it available in many languages.",
+    notificationClickWarning: "Double click to hide"
+  }
+} 
+
+
+function loadLanguage() {
+input.placeholder = language.place;
+settingsTitle.innerHTML = language.langTitle;
+l[language.buttonFocus].style.border = "2px solid white";
+}
+loadLanguage();
+
+function set(lang) {
+localStorage.setItem("quest_language",lang);
+settings.style.left = "-300px";
+setTimeout(function(){location.reload();}, 333);
+}
+
+function notifyUser(message) {
+var x = document.createElement("div");
+x.style.padding = "5px";
+x.style.background = "black";
+x.style.color = "white";
+x.style.position = "fixed";
+x.style.boxShadow = "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)";
+x.style.bottom = "10px";
+x.style.width = "300px";
+x.style.left = "50%";
+x.style.marginLeft = "-150px";
+x.style.cursor = "default";
+x.style.fontSize = "12px";
+x.innerHTML = language.notification;
+x.title = language.notificationClickWarning;
+x.ondblclick = function(){x.remove()};
+document.body.appendChild(x);
+}
+
+function loadSuggestion(a) {
+var y = document.createElement("button");
+y.innerHTML = a;
+y.onclick = function() {input.value = a; location.replace("s.html?q=" + a.replace(/ /gi, "+")); };
+auto.appendChild(y);
+  if (a.toLowerCase().indexOf(input.value.toLowerCase()) < 0) {
+    y.remove();
+  }
+}
+
+//autocomplete
+function smartSuggest() {
+  for (let i = 0; i < library.length ;i++) {
+    loadSuggestion(library[i].split("https://")[1].split(".")[0]);
+  }
+}
+</script>
+</body>
+</html>
