@@ -1,7 +1,7 @@
 # Zearch
 ### An alternative search engine
 --------------------------------
-#### LINKS: [Original](https://lb123658.github.io/zearch/index.html) &nbsp;&nbsp;&nbsp; [Zearch plus](https://lb123658.github.io/zearch/plus) &nbsp;&nbsp;&nbsp; [Zearch plus](https://lb123658.github.io/zearch/quest) &nbsp;&nbsp;&nbsp; [Download extension](https://lb123658.github.io/zearch/extension.zip)
+#### LINKS: [Original](https://lb123658.github.io/zearch/index.html) &nbsp;&nbsp;&nbsp; [Zearch plus](https://lb123658.github.io/zearch/plus) &nbsp;&nbsp;&nbsp; [Quest](https://lb123658.github.io/zearch/quest) &nbsp;&nbsp;&nbsp; [Download extension](https://lb123658.github.io/zearch/extension.zip)
 
 ## About
 #### Original version
