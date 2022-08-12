@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>About Quest</title>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: white;
+    color: black;
+    overflow-x: hidden;
+  }
+  * {
+    background: white;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+  }
+  ::selection {
+    background: lightgrey;
+  }
+ #logo {
+   font-size: 40px;
+   margin: 8px 10px;
+ }
+ #logo span {
+   font-size: 15px;
+   color: red;
+ }
+ #promotion {
+   margin-top: 100px;
+   font-size: 60px;
+   line-height: 0.95;
+   font-weight: bold;
+ }
+ #top {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   height: 70px;
+   width: 100%;
+   border-bottom: 2px solid black;
+   background: white;
+   z-index: 1;
+ }
+ #background {
+   position: fixed;
+   bottom: -10px;
+   right: -10px;
+   width: 100%;
+   user-select: none;
+   -webkit-user-select: none;
+   z-index: -1;
+ }
+ a {
+   text-decoration: none;
+   font-weight: bold;
+ }
+ a:hover {
+   background: #0ee35581;
+ }
+</style>
+</head>
+<body>
+<div id="top">
+<p id="logo">Quest<span>BETA</span></p>
+</div>
+<p id="promotion">Search with complete <br> online privacy. <br> <span class="material-icons" style="font-size:100px;user-select: none;color:#0ee355; padding: 10px;border:10px solid #0ee355;margin: 50px;border-radius:50%;">key</span><br><br>No data is collected<br> about you or <br> what you search. <br> <span class="material-icons" style="font-size:100px;user-select: none;color:#0ee355; padding: 10px;border:10px solid #0ee355;margin: 50px;border-radius:50%;">person_off</span><br><br> With over 20k <br> available search results. <br> <span class="material-icons" style="font-size:100px;user-select: none;color:#0ee355; padding: 10px;border:10px solid #0ee355;margin: 50px;border-radius:50%;">source</span> <br><br> <a href="index.html">Try Quest now</a></p>
+
+<img id="background" src="background.png"/>
+</body>
+</html>
